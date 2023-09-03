@@ -142,7 +142,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: -16}
+        - {x: -12, y: 2}
+        - {x: 3, y: 10}
+        - {x: 16, y: 10}
+        - {x: 16, y: 4}
+        - {x: -4, y: 4}
+        - {x: -8, y: 1}
+        - {x: -8, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: af5f92e24d2484042b2de169818545d5
@@ -163,7 +171,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: 4}
+        - {x: -16, y: 12}
+        - {x: 16, y: 12}
+        - {x: 16, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: c19a41c4581c76a4b8635d6a3b752df9
@@ -184,7 +196,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: 4}
+        - {x: -16, y: 12}
+        - {x: 16, y: 12}
+        - {x: 16, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 32e2fa7c7fbd48f4983fa027e2eacacc
@@ -205,7 +221,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -16}
+        - {x: 4, y: -1}
+        - {x: 4, y: 4}
+        - {x: -16, y: 4}
+        - {x: -16, y: 8}
+        - {x: 2, y: 8}
+        - {x: 12, y: 3}
+        - {x: 12, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 1369515b27b88e04586747c37d34b083
@@ -278,7 +302,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_7'
+      name: No_Collider_9
       rect:
         serializedVersion: 2
         x: 224
@@ -320,7 +344,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_9'
+      name: No_Collider_24
       rect:
         serializedVersion: 2
         x: 288
@@ -341,7 +365,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_10'
+      name: No_Collider_31
       rect:
         serializedVersion: 2
         x: 320
@@ -362,7 +386,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_11'
+      name: No_Collider_38
       rect:
         serializedVersion: 2
         x: 352
@@ -383,7 +407,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_12'
+      name: No_Collider_43
       rect:
         serializedVersion: 2
         x: 384
@@ -404,7 +428,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_13'
+      name: No_Collider_48
       rect:
         serializedVersion: 2
         x: 416
@@ -425,7 +449,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_14'
+      name: No_Collider_52
       rect:
         serializedVersion: 2
         x: 448
@@ -919,7 +943,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: -16}
+        - {x: -12, y: 16}
+        - {x: -4, y: 16}
+        - {x: -5, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 73daefa26f19ba847ac31e33363023d7
@@ -929,7 +957,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_38'
+      name: No_Collider_1
       rect:
         serializedVersion: 2
         x: 32
@@ -950,7 +978,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_39'
+      name: No_Collider_2
       rect:
         serializedVersion: 2
         x: 64
@@ -982,7 +1010,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -16}
+        - {x: 4, y: 16}
+        - {x: 12, y: 16}
+        - {x: 12, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 5534152d8af39a94aa9922f99912794c
@@ -1055,7 +1087,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_44'
+      name: No_Collider_10
       rect:
         serializedVersion: 2
         x: 224
@@ -1076,7 +1108,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_45'
+      name: No_Collider_18
       rect:
         serializedVersion: 2
         x: 256
@@ -1097,7 +1129,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_46'
+      name: No_Collider_25
       rect:
         serializedVersion: 2
         x: 288
@@ -1118,7 +1150,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_47'
+      name: No_Collider_32
       rect:
         serializedVersion: 2
         x: 320
@@ -1139,7 +1171,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_48'
+      name: No_Collider_39
       rect:
         serializedVersion: 2
         x: 352
@@ -1160,7 +1192,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_49'
+      name: No_Collider_44
       rect:
         serializedVersion: 2
         x: 384
@@ -1181,7 +1213,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_50'
+      name: No_Collider_49
       rect:
         serializedVersion: 2
         x: 416
@@ -1202,7 +1234,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_51'
+      name: No_Collider_53
       rect:
         serializedVersion: 2
         x: 448
@@ -1759,7 +1791,21 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -10, y: -16}
+        - {x: -13, y: -9}
+        - {x: -16, y: -2}
+        - {x: -16, y: 12}
+        - {x: -11, y: 16}
+        - {x: -8, y: 14}
+        - {x: -12, y: 12}
+        - {x: -14, y: 8}
+        - {x: -7, y: 7}
+        - {x: -4, y: 4}
+        - {x: 2, y: 2}
+        - {x: 2, y: -10}
+        - {x: 0, y: -12}
+        - {x: -5, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: c3c697fba6e661b4b9d77c21979b6569
@@ -1769,7 +1815,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_78'
+      name: No_Collider_3
       rect:
         serializedVersion: 2
         x: 32
@@ -1790,7 +1836,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_79'
+      name: No_Collider_4
       rect:
         serializedVersion: 2
         x: 64
@@ -1822,7 +1868,19 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -16}
+        - {x: -2, y: -9}
+        - {x: -2, y: 2}
+        - {x: 8, y: 4}
+        - {x: 13, y: 6}
+        - {x: 14, y: 10}
+        - {x: 4, y: 16}
+        - {x: 11, y: 16}
+        - {x: 16, y: 12}
+        - {x: 16, y: -2}
+        - {x: 13, y: -7}
+        - {x: 10, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: a6a3d689c348ffb40a8aea86968483d3
@@ -1895,7 +1953,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_84'
+      name: No_Collider_12
       rect:
         serializedVersion: 2
         x: 224
@@ -1916,7 +1974,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_85'
+      name: No_Collider_19
       rect:
         serializedVersion: 2
         x: 256
@@ -1937,7 +1995,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_86'
+      name: No_Collider_26
       rect:
         serializedVersion: 2
         x: 288
@@ -1958,7 +2016,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_87'
+      name: No_Collider_33
       rect:
         serializedVersion: 2
         x: 320
@@ -1979,7 +2037,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_88'
+      name: No_Collider_40
       rect:
         serializedVersion: 2
         x: 352
@@ -2000,7 +2058,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_89'
+      name: No_Collider_45
       rect:
         serializedVersion: 2
         x: 384
@@ -2021,7 +2079,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_90'
+      name: No_Collider_50
       rect:
         serializedVersion: 2
         x: 416
@@ -2042,7 +2100,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_91'
+      name: No_Collider_54
       rect:
         serializedVersion: 2
         x: 448
@@ -2578,7 +2636,13 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -10, y: -16}
+        - {x: -10, y: 16}
+        - {x: -6, y: 16}
+        - {x: -6, y: -4}
+        - {x: 16, y: -4}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: 437ff7294847afb4cacc751d4236e6f4
@@ -2599,7 +2663,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: -16}
+        - {x: -16, y: -4}
+        - {x: 16, y: -4}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: dde8c8b7a4028e1439b6bf43036128b5
@@ -2620,7 +2688,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: -16}
+        - {x: -16, y: -4}
+        - {x: 16, y: -4}
+        - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: bbd00b0a3a6107c4e988a2189d4530c8
@@ -2641,7 +2713,13 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: -15}
+        - {x: -16, y: -4}
+        - {x: 6, y: -4}
+        - {x: 6, y: 16}
+        - {x: 11, y: 16}
+        - {x: 11, y: -16}
       tessellationDetail: 0
       bones: []
       spriteID: d3e71bd3f4423ed4dbd24678250c2433
@@ -2651,10 +2729,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_120'
+      name: No_Collider6
       rect:
         serializedVersion: 2
-        x: 128
+        x: 129
         y: 864
         width: 32
         height: 32
@@ -2672,7 +2750,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_121'
+      name: No_Collider_17
       rect:
         serializedVersion: 2
         x: 160
@@ -2714,7 +2792,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_123'
+      name: No_Collider_13
       rect:
         serializedVersion: 2
         x: 224
@@ -2735,7 +2813,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_124'
+      name: No_Collider_20
       rect:
         serializedVersion: 2
         x: 256
@@ -2756,7 +2834,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_125'
+      name: No_Collider_27
       rect:
         serializedVersion: 2
         x: 288
@@ -2777,7 +2855,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_126'
+      name: No_Collider_34
       rect:
         serializedVersion: 2
         x: 320
@@ -2798,7 +2876,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_127'
+      name: No_Collider_41
       rect:
         serializedVersion: 2
         x: 352
@@ -2819,7 +2897,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_128'
+      name: No_Collider_46
       rect:
         serializedVersion: 2
         x: 384
@@ -2840,7 +2918,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_129'
+      name: No_Collider_51
       rect:
         serializedVersion: 2
         x: 416
@@ -2861,11 +2939,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_130'
+      name: No_Collider_55
       rect:
         serializedVersion: 2
         x: 448
-        y: 864
+        y: 865
         width: 32
         height: 32
       alignment: 0
@@ -3376,7 +3454,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -14}
+        - {x: -1, y: -12}
+        - {x: -6, y: -10}
+        - {x: -10, y: -4}
+        - {x: -10, y: 16}
+        - {x: 16, y: 16}
+        - {x: 16, y: -14}
       tessellationDetail: 0
       bones: []
       spriteID: 753924b9ecd0af3439fd8fec9bc9c401
@@ -3397,7 +3482,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: -14}
+        - {x: -16, y: 16}
+        - {x: 16, y: 16}
+        - {x: 16, y: -14}
       tessellationDetail: 0
       bones: []
       spriteID: 05da17be1fc639d4786ea09b1381d0ca
@@ -3418,7 +3507,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -16, y: -14}
+        - {x: -16, y: 15}
+        - {x: 16, y: 15}
+        - {x: 16, y: -14}
       tessellationDetail: 0
       bones: []
       spriteID: 180f5a6a360bca24fb0161ed9f6bb9c5
@@ -3439,7 +3532,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -12}
+        - {x: -4, y: -14}
+        - {x: -16, y: -14}
+        - {x: -15, y: 16}
+        - {x: 10, y: 16}
+        - {x: 10, y: -4}
+        - {x: 8, y: -9}
       tessellationDetail: 0
       bones: []
       spriteID: 3a249ff128298b04e9d6b030bda55cfb
@@ -3449,7 +3549,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_158'
+      name: No_Collider_5
       rect:
         serializedVersion: 2
         x: 128
@@ -3470,7 +3570,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_159'
+      name: No_Collider_8
       rect:
         serializedVersion: 2
         x: 160
@@ -3512,7 +3612,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_161'
+      name: No_Collider_14
       rect:
         serializedVersion: 2
         x: 224
@@ -3533,7 +3633,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_162'
+      name: No_Collider_21
       rect:
         serializedVersion: 2
         x: 256
@@ -3554,7 +3654,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_163'
+      name: No_Collider_28
       rect:
         serializedVersion: 2
         x: 288
@@ -3575,7 +3675,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_164'
+      name: No_Collider_35
       rect:
         serializedVersion: 2
         x: 320
@@ -3596,7 +3696,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_165'
+      name: No_Collider_42
       rect:
         serializedVersion: 2
         x: 352
@@ -3617,7 +3717,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_166'
+      name: No_Collider_47
       rect:
         serializedVersion: 2
         x: 384
@@ -3869,7 +3969,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_178'
+      name: No_Collider_15
       rect:
         serializedVersion: 2
         x: 224
@@ -3890,7 +3990,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_179'
+      name: No_Collider_22
       rect:
         serializedVersion: 2
         x: 256
@@ -3911,7 +4011,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_180'
+      name: No_Collider_29
       rect:
         serializedVersion: 2
         x: 288
@@ -3932,7 +4032,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_181'
+      name: No_Collider_36
       rect:
         serializedVersion: 2
         x: 320
@@ -4394,7 +4494,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_203'
+      name: No_Collider_16
       rect:
         serializedVersion: 2
         x: 224
@@ -4403,7 +4503,7 @@ TextureImporter:
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 9, y: 14, z: 23, w: 18}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -4415,7 +4515,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_204'
+      name: No_Collider_23
       rect:
         serializedVersion: 2
         x: 256
@@ -4436,7 +4536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_205'
+      name: No_Collider_30
       rect:
         serializedVersion: 2
         x: 288
@@ -4457,7 +4557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!CL_DEMO_32x32_206'
+      name: No_Collider_37
       rect:
         serializedVersion: 2
         x: 320
@@ -15830,7 +15930,6 @@ TextureImporter:
     nameFileIdTable:
       '!CL_DEMO_32x32_0': 1008828404
       '!CL_DEMO_32x32_1': 1206767605
-      '!CL_DEMO_32x32_10': -1456478756
       '!CL_DEMO_32x32_100': -1799136367
       '!CL_DEMO_32x32_101': -1693773322
       '!CL_DEMO_32x32_102': 916428495
@@ -15841,7 +15940,6 @@ TextureImporter:
       '!CL_DEMO_32x32_107': -603581398
       '!CL_DEMO_32x32_108': 545087440
       '!CL_DEMO_32x32_109': 497035617
-      '!CL_DEMO_32x32_11': 1187352615
       '!CL_DEMO_32x32_110': 422729673
       '!CL_DEMO_32x32_111': 877098483
       '!CL_DEMO_32x32_112': -383087830
@@ -15852,19 +15950,7 @@ TextureImporter:
       '!CL_DEMO_32x32_117': 1031776836
       '!CL_DEMO_32x32_118': 1949631315
       '!CL_DEMO_32x32_119': -643192875
-      '!CL_DEMO_32x32_12': -31333438
-      '!CL_DEMO_32x32_120': -729593514
-      '!CL_DEMO_32x32_121': -390325794
       '!CL_DEMO_32x32_122': 1430491323
-      '!CL_DEMO_32x32_123': 530154728
-      '!CL_DEMO_32x32_124': -303156331
-      '!CL_DEMO_32x32_125': -529416912
-      '!CL_DEMO_32x32_126': 1439924689
-      '!CL_DEMO_32x32_127': -837235404
-      '!CL_DEMO_32x32_128': -582248681
-      '!CL_DEMO_32x32_129': 1618479956
-      '!CL_DEMO_32x32_13': -980394898
-      '!CL_DEMO_32x32_130': -1932643971
       '!CL_DEMO_32x32_131': -1545769672
       '!CL_DEMO_32x32_132': -1698310247
       '!CL_DEMO_32x32_133': 1298257933
@@ -15874,7 +15960,6 @@ TextureImporter:
       '!CL_DEMO_32x32_137': -109775316
       '!CL_DEMO_32x32_138': 462537410
       '!CL_DEMO_32x32_139': -522063630
-      '!CL_DEMO_32x32_14': 831371185
       '!CL_DEMO_32x32_140': -199392903
       '!CL_DEMO_32x32_141': -373354299
       '!CL_DEMO_32x32_142': -695413228
@@ -15894,16 +15979,8 @@ TextureImporter:
       '!CL_DEMO_32x32_155': -1100163245
       '!CL_DEMO_32x32_156': -2146029716
       '!CL_DEMO_32x32_157': -1192961464
-      '!CL_DEMO_32x32_158': -2014597853
-      '!CL_DEMO_32x32_159': -1795663423
       '!CL_DEMO_32x32_16': -105424748
       '!CL_DEMO_32x32_160': 2093702184
-      '!CL_DEMO_32x32_161': -703949791
-      '!CL_DEMO_32x32_162': 1632234107
-      '!CL_DEMO_32x32_163': -1037273713
-      '!CL_DEMO_32x32_164': 1142654208
-      '!CL_DEMO_32x32_165': -655370182
-      '!CL_DEMO_32x32_166': -1654995783
       '!CL_DEMO_32x32_167': 37176254
       '!CL_DEMO_32x32_168': -109222108
       '!CL_DEMO_32x32_169': 365519276
@@ -15916,11 +15993,7 @@ TextureImporter:
       '!CL_DEMO_32x32_175': -1302943707
       '!CL_DEMO_32x32_176': 229783476
       '!CL_DEMO_32x32_177': 839393787
-      '!CL_DEMO_32x32_178': -2081370105
-      '!CL_DEMO_32x32_179': -2032133346
       '!CL_DEMO_32x32_18': -1230355868
-      '!CL_DEMO_32x32_180': -951816801
-      '!CL_DEMO_32x32_181': 1333505423
       '!CL_DEMO_32x32_182': 272273068
       '!CL_DEMO_32x32_183': -445839587
       '!CL_DEMO_32x32_184': -1755441331
@@ -15945,10 +16018,6 @@ TextureImporter:
       '!CL_DEMO_32x32_200': 1273622296
       '!CL_DEMO_32x32_201': -658699998
       '!CL_DEMO_32x32_202': 1093294451
-      '!CL_DEMO_32x32_203': 485049124
-      '!CL_DEMO_32x32_204': -353967238
-      '!CL_DEMO_32x32_205': -1111423312
-      '!CL_DEMO_32x32_206': 1680592969
       '!CL_DEMO_32x32_207': 2084079355
       '!CL_DEMO_32x32_208': -1632263192
       '!CL_DEMO_32x32_209': 1932202727
@@ -16140,7 +16209,6 @@ TextureImporter:
       '!CL_DEMO_32x32_377': 1939900758
       '!CL_DEMO_32x32_378': 492328875
       '!CL_DEMO_32x32_379': 1823880516
-      '!CL_DEMO_32x32_38': 1795000546
       '!CL_DEMO_32x32_380': 59887435
       '!CL_DEMO_32x32_381': -211060209
       '!CL_DEMO_32x32_382': -339899012
@@ -16151,7 +16219,6 @@ TextureImporter:
       '!CL_DEMO_32x32_387': 1610594206
       '!CL_DEMO_32x32_388': 1601564387
       '!CL_DEMO_32x32_389': -340160780
-      '!CL_DEMO_32x32_39': -1262776384
       '!CL_DEMO_32x32_390': -1060144637
       '!CL_DEMO_32x32_391': 1247957927
       '!CL_DEMO_32x32_392': -738908869
@@ -16207,7 +16274,6 @@ TextureImporter:
       '!CL_DEMO_32x32_437': 1576250916
       '!CL_DEMO_32x32_438': 397622633
       '!CL_DEMO_32x32_439': 1481224851
-      '!CL_DEMO_32x32_44': 1699368364
       '!CL_DEMO_32x32_440': 2070344767
       '!CL_DEMO_32x32_441': -902371731
       '!CL_DEMO_32x32_442': -307520050
@@ -16218,7 +16284,6 @@ TextureImporter:
       '!CL_DEMO_32x32_447': 1921456360
       '!CL_DEMO_32x32_448': 857077064
       '!CL_DEMO_32x32_449': 1958135691
-      '!CL_DEMO_32x32_45': 168548583
       '!CL_DEMO_32x32_450': 713815337
       '!CL_DEMO_32x32_451': 212218487
       '!CL_DEMO_32x32_452': 537865490
@@ -16229,7 +16294,6 @@ TextureImporter:
       '!CL_DEMO_32x32_457': 96313700
       '!CL_DEMO_32x32_458': -777193910
       '!CL_DEMO_32x32_459': 1456060173
-      '!CL_DEMO_32x32_46': -1321317927
       '!CL_DEMO_32x32_460': -1135900632
       '!CL_DEMO_32x32_461': 1790056919
       '!CL_DEMO_32x32_462': 1337069459
@@ -16240,7 +16304,6 @@ TextureImporter:
       '!CL_DEMO_32x32_467': -1601581699
       '!CL_DEMO_32x32_468': -1958898848
       '!CL_DEMO_32x32_469': 602999124
-      '!CL_DEMO_32x32_47': 1022363727
       '!CL_DEMO_32x32_470': 109382899
       '!CL_DEMO_32x32_471': -612646551
       '!CL_DEMO_32x32_472': -957762592
@@ -16251,7 +16314,6 @@ TextureImporter:
       '!CL_DEMO_32x32_477': -391188621
       '!CL_DEMO_32x32_478': 366740188
       '!CL_DEMO_32x32_479': 1808665641
-      '!CL_DEMO_32x32_48': 1511581102
       '!CL_DEMO_32x32_480': -376435789
       '!CL_DEMO_32x32_481': -1150480224
       '!CL_DEMO_32x32_482': -62625257
@@ -16262,7 +16324,6 @@ TextureImporter:
       '!CL_DEMO_32x32_487': -2016496889
       '!CL_DEMO_32x32_488': -1597245120
       '!CL_DEMO_32x32_489': 1149869551
-      '!CL_DEMO_32x32_49': 1461129211
       '!CL_DEMO_32x32_490': -1555261142
       '!CL_DEMO_32x32_491': 1863863936
       '!CL_DEMO_32x32_492': -262988282
@@ -16274,7 +16335,6 @@ TextureImporter:
       '!CL_DEMO_32x32_498': 491992191
       '!CL_DEMO_32x32_499': 502596518
       '!CL_DEMO_32x32_5': 1574123752
-      '!CL_DEMO_32x32_50': 1760611949
       '!CL_DEMO_32x32_500': -578140358
       '!CL_DEMO_32x32_501': -1943233379
       '!CL_DEMO_32x32_502': 115991811
@@ -16285,7 +16345,6 @@ TextureImporter:
       '!CL_DEMO_32x32_507': -742421401
       '!CL_DEMO_32x32_508': -1603878949
       '!CL_DEMO_32x32_509': 1164872697
-      '!CL_DEMO_32x32_51': 1224730412
       '!CL_DEMO_32x32_510': -1483619016
       '!CL_DEMO_32x32_511': 969133487
       '!CL_DEMO_32x32_512': 964098532
@@ -16495,7 +16554,6 @@ TextureImporter:
       '!CL_DEMO_32x32_697': 1721531953
       '!CL_DEMO_32x32_698': -320717040
       '!CL_DEMO_32x32_699': -759835285
-      '!CL_DEMO_32x32_7': -740215254
       '!CL_DEMO_32x32_70': 331603219
       '!CL_DEMO_32x32_700': 1752538147
       '!CL_DEMO_32x32_701': -2008948119
@@ -16551,22 +16609,11 @@ TextureImporter:
       '!CL_DEMO_32x32_75': 586516746
       '!CL_DEMO_32x32_76': 1262470
       '!CL_DEMO_32x32_77': 2057545160
-      '!CL_DEMO_32x32_78': -1355126856
-      '!CL_DEMO_32x32_79': 547192381
       '!CL_DEMO_32x32_8': 1588912533
       '!CL_DEMO_32x32_80': 1938660679
       '!CL_DEMO_32x32_81': -164418617
       '!CL_DEMO_32x32_82': -490145490
       '!CL_DEMO_32x32_83': 564781050
-      '!CL_DEMO_32x32_84': 1686222821
-      '!CL_DEMO_32x32_85': 1201694607
-      '!CL_DEMO_32x32_86': -363356556
-      '!CL_DEMO_32x32_87': -1176074443
-      '!CL_DEMO_32x32_88': 660661629
-      '!CL_DEMO_32x32_89': -1621589874
-      '!CL_DEMO_32x32_9': 1021072490
-      '!CL_DEMO_32x32_90': 346738
-      '!CL_DEMO_32x32_91': 129022763
       '!CL_DEMO_32x32_92': 1984483604
       '!CL_DEMO_32x32_93': 367540208
       '!CL_DEMO_32x32_94': 173612169
@@ -16575,6 +16622,59 @@ TextureImporter:
       '!CL_DEMO_32x32_97': -1849939061
       '!CL_DEMO_32x32_98': 486574883
       '!CL_DEMO_32x32_99': -1070568087
+      No_Collider6: -729593514
+      No_Collider_1: 1795000546
+      No_Collider_10: 1699368364
+      No_Collider_12: 1686222821
+      No_Collider_13: 530154728
+      No_Collider_14: 530154728
+      No_Collider_15: -703949791
+      No_Collider_16: -2081370105
+      No_Collider_17: -729593514
+      No_Collider_18: 485049124
+      No_Collider_19: 168548583
+      No_Collider_2: -1262776384
+      No_Collider_20: -303156331
+      No_Collider_21: -303156331
+      No_Collider_22: -2032133346
+      No_Collider_23: -2032133346
+      No_Collider_24: -353967238
+      No_Collider_25: 1021072490
+      No_Collider_26: -1321317927
+      No_Collider_27: -363356556
+      No_Collider_28: -529416912
+      No_Collider_29: -1037273713
+      No_Collider_3: -1355126856
+      No_Collider_30: -1111423312
+      No_Collider_31: -1111423312
+      No_Collider_32: -1456478756
+      No_Collider_33: 1022363727
+      No_Collider_34: -1176074443
+      No_Collider_35: 1439924689
+      No_Collider_36: 1142654208
+      No_Collider_37: 1333505423
+      No_Collider_38: 1680592969
+      No_Collider_39: 1187352615
+      No_Collider_4: 547192381
+      No_Collider_40: 660661629
+      No_Collider_41: 660661629
+      No_Collider_42: -837235404
+      No_Collider_43: -655370182
+      No_Collider_44: -31333438
+      No_Collider_45: 1461129211
+      No_Collider_46: -1621589874
+      No_Collider_47: -582248681
+      No_Collider_48: -1654995783
+      No_Collider_49: -980394898
+      No_Collider_5: -2014597853
+      No_Collider_50: 346738
+      No_Collider_51: 346738
+      No_Collider_52: -1932643971
+      No_Collider_53: 831371185
+      No_Collider_54: 1224730412
+      No_Collider_55: 129022763
+      No_Collider_8: -1795663423
+      No_Collider_9: -740215254
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
