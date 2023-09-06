@@ -45,18 +45,15 @@ public class InventorySwapper : MonoBehaviour
 
  
 
-    public void PerformSlotRightInteraction(GameObject slot)
+    public void PerformSlotRightInteraction(GameObject slotGB)
     {
         switch (displayer.InventoryStatus)
         {
-            case InventoryStatusType.InventoryClose:
-                //Item Use sistemi yapýldýðýnda basýlan eþyayýnýn slotuna geçip kullanýcak
-                break;
             case InventoryStatusType.InventoryOpen:
-                ItemDrag(displayer.GameObjectToSlot[slot], 1);
+                ItemDrag(displayer.GameObjectToSlot[slotGB], 1);
                 break;
             case InventoryStatusType.ItemOnDrag:
-                ItemDrag(displayer.GameObjectToSlot[slot], 1);
+                ItemDrag(displayer.GameObjectToSlot[slotGB], 1);
                 break;
         }
     }

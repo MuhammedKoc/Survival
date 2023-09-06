@@ -37,8 +37,7 @@ public class SlotSelector : MonoBehaviour
         if(slotIndex >= 1 && slotIndex <= 8)
         {
             if(SelectedSlotIndex >= 0 && SelectedSlotIndex != slotIndex-1)
-            {
-                Debug.Log("selected" + SelectedSlotIndex);
+            {;
                 displayer.SlotToGameObject[inventory.Slotbar[SelectedSlotIndex]].GetComponent<Image>().sprite = DefaultSlotSprite;
             }
 
@@ -50,6 +49,21 @@ public class SlotSelector : MonoBehaviour
         {
             Debug.Log("Slot Index Error");
         }
+    }
+
+    public void SlotItemUse()
+    {
+        if (displayer.InventoryStatus == InventoryStatusType.InventoryClose)
+        {
+            InventorySlot slot = inventory.Slotbar[SelectedSlotIndex];
+
+            if (slot.item != null && slot.item.type == ItemType.Food)
+            {
+                Debug.Log(slot.item.type);
+
+                displayer.UseSlot(slot);
+            }
+        }   
     }
 
 }

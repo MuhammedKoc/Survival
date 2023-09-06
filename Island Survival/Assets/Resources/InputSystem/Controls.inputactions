@@ -136,7 +136,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MouseClick",
+                    "name": "MouseLeftClick",
                     "type": "Button",
                     "id": "667aebcb-a3a3-4ac4-8930-82a6a2422845",
                     "expectedControlType": "Button",
@@ -152,6 +152,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MouseRightClick",
+                    "type": "Button",
+                    "id": "7e7c1b26-8ead-4438-96bd-fca02f40e150",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -184,7 +193,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseClick",
+                    "action": "MouseLeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -273,6 +282,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c383b19-00fc-4f7f-9544-d8801cfc85df",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseRightClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

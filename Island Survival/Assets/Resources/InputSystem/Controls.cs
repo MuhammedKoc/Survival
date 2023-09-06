@@ -158,7 +158,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MouseClick"",
+                    ""name"": ""MouseLeftClick"",
                     ""type"": ""Button"",
                     ""id"": ""667aebcb-a3a3-4ac4-8930-82a6a2422845"",
                     ""expectedControlType"": ""Button"",
@@ -174,6 +174,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseRightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e7c1b26-8ead-4438-96bd-fca02f40e150"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -206,7 +215,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MouseClick"",
+                    ""action"": ""MouseLeftClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -297,6 +306,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Slotbar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c383b19-00fc-4f7f-9544-d8801cfc85df"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseRightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -312,8 +332,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
         m_UI_Menu = m_UI.FindAction("Menu", throwIfNotFound: true);
-        m_UI_MouseClick = m_UI.FindAction("MouseClick", throwIfNotFound: true);
+        m_UI_MouseLeftClick = m_UI.FindAction("MouseLeftClick", throwIfNotFound: true);
         m_UI_Slotbar = m_UI.FindAction("Slotbar", throwIfNotFound: true);
+        m_UI_MouseRightClick = m_UI.FindAction("MouseRightClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -439,16 +460,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Inventory;
     private readonly InputAction m_UI_Menu;
-    private readonly InputAction m_UI_MouseClick;
+    private readonly InputAction m_UI_MouseLeftClick;
     private readonly InputAction m_UI_Slotbar;
+    private readonly InputAction m_UI_MouseRightClick;
     public struct UIActions
     {
         private @Controls m_Wrapper;
         public UIActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputAction @Menu => m_Wrapper.m_UI_Menu;
-        public InputAction @MouseClick => m_Wrapper.m_UI_MouseClick;
+        public InputAction @MouseLeftClick => m_Wrapper.m_UI_MouseLeftClick;
         public InputAction @Slotbar => m_Wrapper.m_UI_Slotbar;
+        public InputAction @MouseRightClick => m_Wrapper.m_UI_MouseRightClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -464,12 +487,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
-            @MouseClick.started += instance.OnMouseClick;
-            @MouseClick.performed += instance.OnMouseClick;
-            @MouseClick.canceled += instance.OnMouseClick;
+            @MouseLeftClick.started += instance.OnMouseLeftClick;
+            @MouseLeftClick.performed += instance.OnMouseLeftClick;
+            @MouseLeftClick.canceled += instance.OnMouseLeftClick;
             @Slotbar.started += instance.OnSlotbar;
             @Slotbar.performed += instance.OnSlotbar;
             @Slotbar.canceled += instance.OnSlotbar;
+            @MouseRightClick.started += instance.OnMouseRightClick;
+            @MouseRightClick.performed += instance.OnMouseRightClick;
+            @MouseRightClick.canceled += instance.OnMouseRightClick;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -480,12 +506,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
-            @MouseClick.started -= instance.OnMouseClick;
-            @MouseClick.performed -= instance.OnMouseClick;
-            @MouseClick.canceled -= instance.OnMouseClick;
+            @MouseLeftClick.started -= instance.OnMouseLeftClick;
+            @MouseLeftClick.performed -= instance.OnMouseLeftClick;
+            @MouseLeftClick.canceled -= instance.OnMouseLeftClick;
             @Slotbar.started -= instance.OnSlotbar;
             @Slotbar.performed -= instance.OnSlotbar;
             @Slotbar.canceled -= instance.OnSlotbar;
+            @MouseRightClick.started -= instance.OnMouseRightClick;
+            @MouseRightClick.performed -= instance.OnMouseRightClick;
+            @MouseRightClick.canceled -= instance.OnMouseRightClick;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -513,7 +542,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnMouseClick(InputAction.CallbackContext context);
+        void OnMouseLeftClick(InputAction.CallbackContext context);
         void OnSlotbar(InputAction.CallbackContext context);
+        void OnMouseRightClick(InputAction.CallbackContext context);
     }
 }

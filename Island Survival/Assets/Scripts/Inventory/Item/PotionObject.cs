@@ -7,7 +7,3 @@ public class PotionObject : ItemObject
     public EffectType effectType;
 }
 
-public enum EffectType
-{
-    //After Game Design
-}

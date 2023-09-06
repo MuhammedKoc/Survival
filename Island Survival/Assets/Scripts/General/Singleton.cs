@@ -2,20 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton : MonoBehaviour
+public abstract class Singelton<T> : MonoBehaviour
+    where T : class, new()
 {
-    public static Singleton Instance { get; private set; }
+    private static T _instance = null;
+
+    public static T Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+
+            }
+            return _instance;
+        }
+    }
 
     private void Awake()
     {
-        // Bir örnek varsa ve ben deðilse, yoket.
-
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        _instance = this as T;
     }
 }
+
+

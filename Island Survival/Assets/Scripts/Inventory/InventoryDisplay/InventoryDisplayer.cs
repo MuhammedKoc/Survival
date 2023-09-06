@@ -128,6 +128,20 @@ public class InventoryDisplayer : MonoBehaviour
             dict.Add(List1[i], List2[i]);
         }
     }
+
+    public void UseSlot(InventorySlot slot)
+    {   
+        slot.item.Use();
+
+        slot.Amount--;
+
+        if (slot.Amount == 0)
+        {
+            slot.Clear();
+        }
+
+        UpdateSlotUI(slot);
+    }
 }
 
 public enum InventoryStatusType

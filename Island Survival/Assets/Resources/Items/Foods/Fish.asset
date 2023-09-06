@@ -18,4 +18,6 @@ MonoBehaviour:
   Prefab: {fileID: 9211554253353741059, guid: 2578bd96dc8c1b24a904e6b6fd8426f3, type: 3}
   Description: 
   stackable: 1
-  GiveHeal: 0
+  FoodType: 1
+  FoodValence: 0
+  FoodValue: 10

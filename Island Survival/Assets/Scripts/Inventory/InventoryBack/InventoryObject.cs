@@ -21,7 +21,6 @@ public class InventoryObject : ScriptableObject
     public bool AddItem(ItemObject item, int amount)
     {
         int _TempAmount = amount;
-        Debug.Log("item slot" + _TempAmount);
         if (item.stackable)
         {
             if (StackableItemAddAmount(Slotbar, item, amount, SlotBarAction, ref _TempAmount)) return true;
@@ -131,20 +130,16 @@ public class InventoryObject : ScriptableObject
                 if (Temp_Amount == 0) return true;
                 
                 if (slotList[i].Amount + Temp_Amount <= _item.stacksize)
-                {
-                    
-                    Debug.Log("item stack add" + Temp_Amount + " " + i + " " + slotList[i].Amount + " " + _item.stacksize);
+                {          
                     slotList[i].Amount += Temp_Amount;
                     _Action?.Invoke(slotList[i]);
                     return true;
                 }
                 else
                 {
-                    Debug.Log("Deneme");
                     int test = _item.stacksize - slotList[i].Amount;
                     slotList[i].Amount += test;
                     Temp_Amount -= test;
-                    Debug.Log(Temp_Amount + " asda");
                     _Action?.Invoke(slotList[i]);
                 }
                 

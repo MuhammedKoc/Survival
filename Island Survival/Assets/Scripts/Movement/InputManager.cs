@@ -6,24 +6,8 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class InputManager : Singleton, IControllable
+public class InputManager : MonoBehaviour, IControllable
 {
-    //private static InputManager instance = null;
-
-    //public static InputManager Instance
-    //{
-    //    get
-    //    {
-    //        if(instance == null)
-    //        {
-    //            Debug.Log("Input Manager Bulunmadý(Instance)");
-    //        }
-    //        return instance;
-    //    }
-    //}
-
-    
-
     Controls controls;
     [SerializeField] Vector2 moveDirection;
     bool isRunning;
@@ -35,6 +19,8 @@ public class InputManager : Singleton, IControllable
     [SerializeField] InputManagerEvent OpenInventory;
 
     [SerializeField] InputManagerEvent OnLeftClick;
+
+    [SerializeField] InputManagerEvent OnRightClick;
 
     public event Action<int> SlotChange;
 
@@ -64,7 +50,9 @@ public class InputManager : Singleton, IControllable
 
         controls.UI.Inventory.performed += OnInventoryPerformed;
 
-        controls.UI.MouseClick.performed += OnLeftClickPerformed;
+        controls.UI.MouseLeftClick.performed += OnLeftClickPerformed;
+
+        controls.UI.MouseRightClick.performed += OnRightClickPerformed;
 
         controls.UI.Slotbar.performed += ctx => SlotChange.Invoke(int.Parse(ctx.control.name));
     }
@@ -80,6 +68,9 @@ public class InputManager : Singleton, IControllable
         controls.Player.Run.canceled -= OnRunCancelled;
 
         controls.UI.Inventory.performed -= OnInventoryPerformed;
+        controls.UI.MouseLeftClick.performed -= OnLeftClickPerformed;
+
+        controls.UI.MouseRightClick.performed -= OnRightClickPerformed;
     }
 
     public Vector2 GetMoveDirection()
@@ -120,6 +111,11 @@ public class InputManager : Singleton, IControllable
             OnLeftClick.Invoke();
         }
     }
+
+    private void OnRightClickPerformed(InputAction.CallbackContext obj)
+    {
+        OnRightClick.Invoke();
+    }
     #endregion
 
     #region Cancelled
@@ -134,5 +130,7 @@ public class InputManager : Singleton, IControllable
     {
         isRunning = false;
     }
+
+
     #endregion
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +36,7 @@ public class StaminaManager : MonoBehaviour
         {
             if(Stamina <= MaxStamina - 0.01)
             {
+                Bar.transform.parent.gameObject.SetActive(true);
                 Stamina += StaminaRegen * Time.deltaTime;
                 UpdateStaminaBar();
 
@@ -42,6 +44,7 @@ public class StaminaManager : MonoBehaviour
                 {
                     move.isRunable = true;
                     HasRegenerated = true;
+                    Bar.transform.parent.gameObject.SetActive(false);
                 }
             }
         }
@@ -51,6 +54,7 @@ public class StaminaManager : MonoBehaviour
     {
         if(HasRegenerated)
         {
+            Bar.transform.parent.gameObject.SetActive(true);
             AreSprinting = true;
             Stamina-= StaminaDrain * Time.deltaTime;
             UpdateStaminaBar();
