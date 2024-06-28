@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class SlotSelector : MonoBehaviour
@@ -15,8 +16,6 @@ public class SlotSelector : MonoBehaviour
     [SerializeField] Sprite DefaultSlotSprite;
     [SerializeField] Sprite SelectedSlotSprite;
 
-    [SerializeField] InputManager input;
-
     private void Start()
     {
         displayer = GetComponent<InventoryDisplayer>();
@@ -24,26 +23,21 @@ public class SlotSelector : MonoBehaviour
 
     private void OnEnable()
     {
-        input.SlotChange += ChangeSlot;
+        InputManager.Instance.Controls.UI.Slotbar.performed += OnSlotChangePerformed;
     }
 
     private void OnDisable()
     {
-        input.SlotChange -= ChangeSlot;
+        InputManager.Instance.Controls.UI.Slotbar.performed -= OnSlotChangePerformed;
     }
 
     public void ChangeSlot(int slotIndex)
     {
-        if(slotIndex >= 1 && slotIndex <= 8)
+        if(slotIndex >= 0 && slotIndex <= 8)
         {
-            if(SelectedSlotIndex >= 0 && SelectedSlotIndex != slotIndex-1)
-            {;
-                displayer.SlotToGameObject[inventory.Slotbar[SelectedSlotIndex]].GetComponent<Image>().sprite = DefaultSlotSprite;
-            }
+            displayer.SelectSlotbarSlot(slotIndex);
 
-            displayer.SlotToGameObject[inventory.Slotbar[slotIndex-1]].GetComponent<Image>().sprite = SelectedSlotSprite;
-
-            SelectedSlotIndex = slotIndex-1;
+            SelectedSlotIndex = slotIndex;
         }
         else
         {
@@ -55,15 +49,20 @@ public class SlotSelector : MonoBehaviour
     {
         if (displayer.InventoryStatus == InventoryStatusType.InventoryClose)
         {
-            InventorySlot slot = inventory.Slotbar[SelectedSlotIndex];
+            InventorySlotObsolote slotObsolote = inventory.Slotbar[SelectedSlotIndex];
 
-            if (slot.item != null && slot.item.type == ItemType.Food)
+            if (slotObsolote.item != null && slotObsolote.item.type == ItemType.Food)
             {
-                Debug.Log(slot.item.type);
+                Debug.Log(slotObsolote.item.type);
 
-                displayer.UseSlot(slot);
+                displayer.UseSlot(slotObsolote);
             }
         }   
+    }
+
+    private void OnSlotChangePerformed(InputAction.CallbackContext obj)
+    {
+        ChangeSlot(int.Parse(obj.control.name));
     }
 
 }

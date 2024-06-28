@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MyBox;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -9,6 +10,8 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "New Item Object", menuName = "Inventory/Item")]
 public class ItemObject : ScriptableObject
 {
+    //TODO: Gereksiz publicleri, SerializeField'lere çevir
+    
     public string ItemName;
     public ItemType type;
     public Sprite icon;
@@ -20,10 +23,9 @@ public class ItemObject : ScriptableObject
     public string Description;
 
     public bool stackable;
-    public int stacksize
-    {
-        get { return 32; }
-    }
+    
+    [ConditionalField(nameof(stackable))]
+    public int stacksize;
 
     private void Awake()
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEditor;
 
 public class ItemCollector : MonoBehaviour
@@ -18,12 +17,13 @@ public class ItemCollector : MonoBehaviour
 
     [SerializeField] Collider2D[] DetectedItems;
     [SerializeField] Collider2D[] Items;
-    InventoryManager inventoryManager;
     List<GameObject> TakenItems = new List<GameObject>();
+
+    InventoryNotifier Notifier;
 
     private void Start()
     {
-        inventoryManager = GetComponent<InventoryManager>();
+        Notifier = GetComponent<InventoryNotifier>();
     }
 
     private void Update()
@@ -38,7 +38,7 @@ public class ItemCollector : MonoBehaviour
         for (int i = 0; i < DetectedItems.Length; i++)
         {
             Item _item = DetectedItems[i].GetComponent<Item>();
-            if (inventoryManager.Inventory.CheckSpaceForItem(_item.item, _item.Amount))
+            if (InventoryManager.Instance.CheckSpaceForItem(_item.item, _item.Amount))
             {
                 DetectedItems[i].transform.position = Vector2.MoveTowards(DetectedItems[i].transform.position, this.transform.position, 0.03f);
             }
@@ -54,18 +54,21 @@ public class ItemCollector : MonoBehaviour
             if (!TakenItems.Contains(Items[i].gameObject))
             {
                 Item _item = Items[i].gameObject.GetComponent<Item>();
-                if (inventoryManager.Inventory.AddItem(_item.item, _item.Amount))
+                if (InventoryManager.Instance.AddItem(_item.item, _item.Amount, out int remainAmount))
                 {
                     TakenItems.Add(Items[i].gameObject);
+                    Notifier.NotifyItem(_item.item, _item.Amount);  
+                    Debug.Log("Destroy"+ _item.Amount);
                     Destroy(Items[i].gameObject);
+                }
+                else
+                {
+                    Notifier.NotifyItem(_item.item, _item.Amount-remainAmount);
+                    _item.Amount = remainAmount;
+                    Debug.Log("else"+ _item.Amount);
                 }
             }
         }
-    }
-
-    void print()
-    {
-        Debug.Log("as");
     }
 
     private void OnDrawGizmos()

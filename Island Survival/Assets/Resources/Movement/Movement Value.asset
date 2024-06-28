@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Movement Value
   m_EditorClassIdentifier: 
   Speed: 4
-  RunSpeed: 6
+  RunSpeed: 8
   RunStaminaCost: 0
   DashSpeed: 10
   DashDuration: 0.35

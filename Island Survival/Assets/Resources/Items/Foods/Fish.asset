@@ -16,8 +16,13 @@ MonoBehaviour:
   type: 3
   icon: {fileID: -195630607, guid: 928e4d0fdf12d0446ad80c0836adda4a, type: 3}
   Prefab: {fileID: 9211554253353741059, guid: 2578bd96dc8c1b24a904e6b6fd8426f3, type: 3}
-  Description: 
+  Description: You can found in the sea
   stackable: 1
-  FoodType: 1
-  FoodValence: 0
-  FoodValue: 10
+  stacksize: 32
+  Effects:
+  - effect: {fileID: 11400000, guid: 87f989fd27dbe664dba6bb0870af2765, type: 2}
+    value: 10
+    Duration: 0
+  - effect: {fileID: 11400000, guid: d92460f7b666d264585462fede81a099, type: 2}
+    value: 10
+    Duration: 0

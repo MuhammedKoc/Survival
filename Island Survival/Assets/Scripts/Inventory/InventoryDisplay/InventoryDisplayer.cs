@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Inventory.InventoryBack;
+using Inventory.InventoryDisplay;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,137 +12,120 @@ using UnityEngine.UI;
 
 public class InventoryDisplayer : MonoBehaviour
 {
-    [SerializeField] InventoryObject inventory;
+    [SerializeField]
+    private GameObject rootCanvas;
+    
+    [SerializeField] private GameObject SlotsGB;
 
-    [SerializeField] GameObject SlotsGB;
+    [SerializeField]
+    private Transform inventorySlotsParent;
 
-    [SerializeField] List<GameObject> InventorySlots = new List<GameObject>();
-    [SerializeField] List<GameObject> Slotbars = new List<GameObject>();
-
-    public Dictionary<InventorySlot, GameObject> SlotToGameObject = new Dictionary<InventorySlot, GameObject>();
-
-    public Dictionary<GameObject, InventorySlot> GameObjectToSlot = new Dictionary<GameObject, InventorySlot>();
-
+    [SerializeField]
+    private Transform slotbarsParent;
+    
     public InventoryStatusType InventoryStatus;
 
     public bool CanOpenInventory;
 
+    
+    #region Privates
+
+    private List<InventorySlot> InventorySlots = new List<InventorySlot>();
+    private List<InventorySlot> InventorySlotBars = new List<InventorySlot>();
+
+    #endregion
+    
     [SerializeField] Sprite ItemNullSprite;
-    private void Awake()
+    public void Init(List<Slot> slots)
     {
-        SetLists();
-
-
+        SetSlotsList();
+        UpdateInventoryUI(slots);
     }
 
     void Start()
     {
-        FillDictionarys();
-        SetSlots();
+        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenInvetory();
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        inventory.SlotBarAction += UpdateSlotUI;
-        inventory.InventorySlotAction += UpdateSlotUI;
+        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenInvetory();
+
     }
 
-    private void OnDisable()
+    public void UpdateInventoryUI(List<Slot> slots)
     {
-        inventory.SlotBarAction -= UpdateSlotUI;
-        inventory.InventorySlotAction -= UpdateSlotUI;
-    }
-
-    public void UpdateSlotUI(InventorySlot slot)
-    {
-        GameObject SlotGameObject = SlotToGameObject[slot];
-
-        if (slot.item != null)
+        foreach (var slot in slots)
         {
-            SlotGameObject.transform.GetChild(0).GetComponent<Image>().sprite = slot.item.icon;
-            SlotGameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = slot.Amount.ToString();
-        }
-        else
-        {
-            SlotGameObject.transform.GetChild(0).GetComponent<Image>().sprite = ItemNullSprite;
-            SlotGameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = null;
-        }
-    }
-
-    void SetLists()
-    {
-        for (int i = 0; i < this.transform.GetChild(0).childCount; i++)
-        {
-            InventorySlots.Add(this.transform.GetChild(0).GetChild(i).gameObject);
-        }
-        for (int i = 0; i < this.transform.GetChild(1).childCount; i++)
-        {
-            Slotbars.Add(this.transform.GetChild(1).GetChild(i).gameObject);
-        }
-
-    }
-
-    void FillDictionarys()
-    {
-        FillDictionaryFromTheList<GameObject, InventorySlot>(GameObjectToSlot, Slotbars.ToList(), inventory.Slotbar.ToList());
-        
-        FillDictionaryFromTheList<GameObject, InventorySlot>(GameObjectToSlot, InventorySlots.ToList(), inventory.inventory.ToList());
-        
-        FillDictionaryFromTheList<InventorySlot, GameObject>(SlotToGameObject, inventory.Slotbar.ToList(), Slotbars.ToList());
-
-        FillDictionaryFromTheList<InventorySlot, GameObject>(SlotToGameObject, inventory.inventory.ToList(), InventorySlots.ToList());
-    }
-
-    void SetSlots()
-    {
-        for (int i = 0; i < InventorySlots.Count; i++)
-        {
-            if (inventory.inventory[i].item != null)
+            if (slot.index < 8)
             {
-                UpdateSlotUI(inventory.inventory[i]);
+                InventorySlotBars[slot.index].Init(slot);
             }
-
-        }
-        for (int i = 0; i < Slotbars.Count; i++)
-        {
-            if (inventory.Slotbar[i].item != null)
+            else
             {
-                UpdateSlotUI(inventory.Slotbar[i]);
+                InventorySlots[slot.index-InventoryManager.Instance.SlotbarSlotCount].Init(slot);
             }
         }
-
+    }
+    
+    private void SetSlotsList()
+    {
+        foreach (Transform slot in slotbarsParent)
+        {
+            InventorySlotBars.Add(slot.GetComponent<InventorySlot>());
+        }
+        
+        foreach (Transform slot in inventorySlotsParent)
+        {
+            InventorySlots.Add(slot.GetComponent<InventorySlot>());
+        }
     }
 
     public void OpenInvetory()
     {
         if (InventoryStatus == InventoryStatusType.InventoryClose || InventoryStatus == InventoryStatusType.InventoryOpen)
         {
-            transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
+            inventorySlotsParent.gameObject.SetActive(!inventorySlotsParent.gameObject.activeSelf);
             if(InventoryStatus == InventoryStatusType.InventoryClose) InventoryStatus = InventoryStatusType.InventoryOpen;
             else if(InventoryStatus == InventoryStatusType.InventoryOpen) InventoryStatus = InventoryStatusType.InventoryClose;
         }
     }
 
-    private void FillDictionaryFromTheList<TKey, TValue>(Dictionary<TKey, TValue> dict, List<TKey> List1, List<TValue> List2)
-    {
-        for (int i = 0; i < List1.Count; i++)
+    public void UseSlot(InventorySlotObsolote slotObsolote)
+    {   
+        slotObsolote.item.Use();
+
+        slotObsolote.Amount--;
+
+        if (slotObsolote.Amount == 0)
         {
-            dict.Add(List1[i], List2[i]);
+            slotObsolote.Clear();
         }
+
+        // UpdateSlotBarUI();
     }
 
-    public void UseSlot(InventorySlot slot)
-    {   
-        slot.item.Use();
-
-        slot.Amount--;
-
-        if (slot.Amount == 0)
+    public void SelectSlotbarSlot(int index)
+    {
+        InventorySlotBars[index].GetComponent<Button>().Select();
+    }
+    
+    
+    public int GetSlotIndex(InventorySlot slot)
+    {
+        if (InventorySlots.Contains(slot))
         {
-            slot.Clear();
+            return InventorySlots.IndexOf(slot) + InventoryManager.Instance.SlotbarSlotCount;
         }
-
-        UpdateSlotUI(slot);
+        else if (InventorySlotBars.Contains(slot))
+        {
+            return InventorySlotBars.IndexOf(slot);
+        }
+        else
+        {
+            Debug.LogError("Not Found Slot In Slot Lists");
+            return -1;
+        }
     }
 }
 

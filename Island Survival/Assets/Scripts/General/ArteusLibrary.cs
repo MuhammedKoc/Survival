@@ -1,13 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEditor;
+using Object = UnityEngine.Object;
 
 public class ArteusLibrary : MonoBehaviour
 {
     static int UILayer = LayerMask.NameToLayer("UI");
 
+    //TODO: Summary'leri doldur.
+    
+    /// <summary>
+    /// It waits until the given Object is not Null.
+    /// </summary>
+    /// <returns> </returns>
     public static bool IsPointerOverUIElement()
     {
         return IsPointerOverUIElement(GetEventSystemRaycastResults());
@@ -35,5 +43,16 @@ public class ArteusLibrary : MonoBehaviour
         List<RaycastResult> raysastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, raysastResults);
         return raysastResults;
+    }
+
+    /// <summary>
+    /// It waits until the given Object is not Null.
+    /// </summary>
+    /// <param name="object">expected parameter value.</param>
+    private static IEnumerator WaitForObejctNotNull(Object variable, Action onNotNull)
+    {
+        yield return new WaitUntil(() => variable != null);
+        
+        onNotNull.Invoke();
     }
 }
