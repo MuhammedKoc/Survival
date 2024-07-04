@@ -2129,7 +2129,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1315565971}
         m_TargetAssemblyTypeName: InventorySwapper, Assembly-CSharp
-        m_MethodName: DropItemOnDrag
+        m_MethodName: DropItemOnDragSpaceArea
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5439,6 +5439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayer: {fileID: 1315565968}
+  slotbar: {fileID: 1315565970}
   swapper: {fileID: 1315565971}
   description: {fileID: 1315565969}
   inventorySlotCount: 24
