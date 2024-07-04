@@ -8,65 +8,71 @@ using UnityEditor;
 public class ItemCollector : MonoBehaviour
 {
     [Header("Collector Values")]
-    [SerializeField] private float CollectorSize;
-    [SerializeField] private Vector2 CollectorOffset;
+    [SerializeField]
+    private float collectorSize;
+
+    [SerializeField]
+    private Vector2 collectorOffset;
+
     [Space(10)]
-    [SerializeField] private float MagnetSize;
-    [SerializeField] private Vector2 MagnetOffset;
-    [SerializeField] private LayerMask Mask;
+    [SerializeField]
+    private float magnetSize;
 
-    [SerializeField] Collider2D[] DetectedItems;
-    [SerializeField] Collider2D[] Items;
-    List<GameObject> TakenItems = new List<GameObject>();
+    [SerializeField]
+    private Vector2 magnetOffset;
 
-    InventoryNotifier Notifier;
+    [SerializeField]
+    private LayerMask mask;
 
-    private void Start()
-    {
-        Notifier = GetComponent<InventoryNotifier>();
-    }
+    [SerializeField]
+    private Collider2D[] detectedItems;
 
+    [SerializeField]
+    private Collider2D[] items;
+
+    [SerializeField]
+    private InventoryNotifier Notifier;
+
+    //State'a taşınancak
     private void Update()
-    {    
+    {
         ItemMagnetic();
         ItemCollect();
     }
 
-    void ItemMagnetic()
+    private void ItemMagnetic()
     {
-        DetectedItems = Physics2D.OverlapCircleAll(MagnetOffset + (Vector2)transform.position, MagnetSize, Mask);
-        for (int i = 0; i < DetectedItems.Length; i++)
+        detectedItems = Physics2D.OverlapCircleAll(magnetOffset + (Vector2)transform.position, magnetSize, mask);
+        foreach (var detectedItem in detectedItems)
         {
-            Item _item = DetectedItems[i].GetComponent<Item>();
-            if (InventoryManager.Instance.CheckSpaceForItem(_item.item, _item.Amount))
-            {
-                DetectedItems[i].transform.position = Vector2.MoveTowards(DetectedItems[i].transform.position, this.transform.position, 0.03f);
-            }
-        }
+            Item _item = detectedItem.GetComponent<Item>();
 
+            if (!_item.isMagnetable) return;
+            if (!InventoryManager.Instance.CheckSpaceForItem(_item.item, _item.Amount)) return;
+
+            detectedItem.transform.position =
+                Vector2.MoveTowards(detectedItem.transform.position, this.transform.position, 0.03f);
+        }
     }
 
-    void ItemCollect()
+    private void ItemCollect()
     {
-        Items = Physics2D.OverlapCircleAll(CollectorOffset + (Vector2)transform.position, CollectorSize, Mask);
-        for (int i = 0; i < Items.Length; i++)
+        items = Physics2D.OverlapCircleAll(collectorOffset + (Vector2)transform.position, collectorSize, mask);
+        foreach (var item in items)
         {
-            if (!TakenItems.Contains(Items[i].gameObject))
+            Item _item = item.gameObject.GetComponent<Item>();
+            if (!_item.isMagnetable) return;
+
+            if (InventoryManager.Instance.AddItem(_item.item, _item.Amount, out int remainAmount))
             {
-                Item _item = Items[i].gameObject.GetComponent<Item>();
-                if (InventoryManager.Instance.AddItem(_item.item, _item.Amount, out int remainAmount))
-                {
-                    TakenItems.Add(Items[i].gameObject);
-                    Notifier.NotifyItem(_item.item, _item.Amount);  
-                    Debug.Log("Destroy"+ _item.Amount);
-                    Destroy(Items[i].gameObject);
-                }
-                else
-                {
-                    Notifier.NotifyItem(_item.item, _item.Amount-remainAmount);
-                    _item.Amount = remainAmount;
-                    Debug.Log("else"+ _item.Amount);
-                }
+                Notifier.NotifyItem(_item.item, _item.Amount);
+                _item.ReturnToPool();
+                _item.isMagnetable = true;
+            }
+            else
+            {
+                Notifier.NotifyItem(_item.item, _item.Amount - remainAmount);
+                _item.Amount = remainAmount;
             }
         }
     }
@@ -74,23 +80,9 @@ public class ItemCollector : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(MagnetOffset + (Vector2)transform.position, MagnetSize);
+        Gizmos.DrawWireSphere(magnetOffset + (Vector2)transform.position, magnetSize);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(CollectorOffset + (Vector2)transform.position, CollectorSize);
+        Gizmos.DrawWireSphere(collectorOffset + (Vector2)transform.position, collectorSize);
     }
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (Mask == (Mask | (1 << collision.gameObject.layer)))
-        {
-            Debug.Log("Item");
-            ItemObject item = collision.gameObject.GetComponent<Item>().item;
-            if (inventoryManager.Inventory.AddItem(item, 1))
-            {
-                TakenItems.Remove(collision.gameObject);
-                Destroy(collision.gameObject);
-            }
-        }
-    }*/
 }

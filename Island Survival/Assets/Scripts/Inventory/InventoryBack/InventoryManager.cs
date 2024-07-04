@@ -4,92 +4,95 @@ using System.Collections.Generic;
 using System.Linq;
 using Inventory.InventoryBack;
 using Inventory.InventoryDisplay;
+using Inventory.Item;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-   [SerializeField]
-   private InventoryDisplayer displayer;
+    #region Side Scripts
 
-   [SerializeField]
-   private InventorySwapper swapper;
-   public InventorySwapper Swapper => swapper;
-   
-   [SerializeField]
-   private InventoryDescription description;
-   public InventoryDescription Description => description;
+    [SerializeField]
+    private InventoryDisplayer displayer;
+    public InventoryDisplayer Displayer => displayer;
 
-   [SerializeField]
-   private int inventorySlotCount;
-   public int InventorySlotCount => inventorySlotCount;
+    [SerializeField]
+    private Slotbar slotbar;
+    public Slotbar Slotbar => slotbar;
+    
+    [SerializeField]
+    private InventorySwapper swapper;
+    public InventorySwapper Swapper => swapper;
 
-   [SerializeField]
-   private int slotbarSlotCount;
-   public int SlotbarSlotCount => slotbarSlotCount;
-   
-   private List<Slot> slots;
+    [SerializeField]
+    private InventoryDescription description;
+    public InventoryDescription Description => description;
 
-   private List<Slot> changedSlots = new List<Slot>();
-   
-   #region Singleton
+    #endregion
 
-   private static InventoryManager instance = null;
-   
-   public static InventoryManager Instance
-   {
-       get
-       {
-           if (instance == null)
-           {
-               Debug.Log(instance.GetType().Name+"Instance is Null");
-           }
+    [SerializeField] private int inventorySlotCount;
+    public int InventorySlotCount => inventorySlotCount;
 
-           return instance;
-       }
-   }
+    [SerializeField] private int slotbarSlotCount;
+    public int SlotbarSlotCount => slotbarSlotCount;
 
-   private void Awake()
-   {
-       instance = this;
-       
-       Init();
-   }
+    //Privates
+    private List<Slot> slots;
+    private List<Slot> changedSlots = new List<Slot>();
 
-   #endregion
+    #region Singleton
 
-   #region Show & Hide
+    private static InventoryManager instance = null;
 
-   [SerializeField]
-   private GameObject rootCanvas;
-   
-   private void Show()
-   {
-       rootCanvas.SetActive(true);
-   }
+    public static InventoryManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.Log(instance.GetType().Name + "Instance is Null");
+            }
 
-   private void Hide()
-   {
-       rootCanvas.SetActive(false);
-   }
+            return instance;
+        }
+    }
 
-   #endregion
-   
-   private void Start()
-   {
-       // InputManager.Instance.Controls.Player.UseSlot += 
-   }
+    private void Awake()
+    {
+        instance = this;
 
-   public void Init()
-   {
-       slots = new List<Slot>();
-       
-       ClearSlots();
-       
-       displayer.Init(slots);
-   }
+        Init();
+    }
 
-   public bool AddItem(ItemObject item, int amount, out int remainAmount)
+    #endregion
+
+    #region Show & Hide
+
+    [SerializeField]
+    private GameObject rootCanvas;
+
+    private void Show()
+    {
+        rootCanvas.SetActive(true);
+    }
+
+    private void Hide()
+    {
+        rootCanvas.SetActive(false);
+    }
+
+    #endregion
+    
+    public void Init()
+    {
+        slots = new List<Slot>();
+
+        ClearSlots();
+
+        displayer.Init(slots);
+    }
+
+    public bool AddItem(ItemObject item, int amount, out int remainAmount)
     {
         int _TempAmount = amount;
         bool resultBool = false;
@@ -101,7 +104,7 @@ public class InventoryManager : MonoBehaviour
             {
                 StackableItemAdd(item, ref _TempAmount);
             }
-            
+
             UpdateUI();
         }
         else
@@ -113,13 +116,13 @@ public class InventoryManager : MonoBehaviour
                 remainAmount = amount;
                 return false;
             }
-            
+
             if (EmptySlotCount > 0)
             {
-                SetEmptySlot(item, _TempAmount);
+                SetItemToFirstEmptySlot(item, _TempAmount);
 
                 UpdateUI();
-                
+
                 remainAmount = 0;
                 return true;
             }
@@ -131,6 +134,7 @@ public class InventoryManager : MonoBehaviour
         remainAmount = _TempAmount;
         return resultBool;
     }
+
     public int EmptySlotCount
     {
         get
@@ -149,16 +153,15 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void SetEmptySlot(ItemObject item, int amount)
+    private void SetItemToFirstEmptySlot(ItemObject item, int amount)
     {
         foreach (var slot in slots)
         {
-            if (slot.item == null)
-            {
-                slot.SetValues(item, amount);
-                changedSlots.Add(slot);
-                break;
-            }
+            if (slot.item != null) continue;
+
+            slot.SetValues(item, amount);
+            changedSlots.Add(slot);
+            break;
         }
     }
 
@@ -185,8 +188,8 @@ public class InventoryManager : MonoBehaviour
     private void ClearSlots()
     {
         slots = new List<Slot>();
-        
-        for (int i = 0; i < inventorySlotCount+slotbarSlotCount; i++)
+
+        for (int i = 0; i < inventorySlotCount + slotbarSlotCount; i++)
         {
             slots.Add(new Slot(i, null, 0));
         }
@@ -199,14 +202,14 @@ public class InventoryManager : MonoBehaviour
             if (_item == slot.item)
             {
                 if (Temp_Amount == 0) return true;
-                
+
                 if (slot.Amount + Temp_Amount <= _item.stacksize)
-                {          
+                {
                     slot.Amount += Temp_Amount;
                     Temp_Amount -= Temp_Amount;
-                    
+
                     changedSlots.Add(slot);
-                    
+
                     return true;
                 }
                 else
@@ -214,35 +217,35 @@ public class InventoryManager : MonoBehaviour
                     int test = _item.stacksize - slot.Amount;
                     slot.Amount += test;
                     changedSlots.Add(slot);
-                    
+
                     Temp_Amount -= test;
                 }
-                
             }
         }
+
         return false;
     }
 
     private bool StackableItemAdd(ItemObject _item, ref int _TempAmount)
     {
         int TempAmount = _TempAmount;
-        
+
         if (_TempAmount > _item.stacksize)
         {
             int requiredSlot = (int)Mathf.Ceil((float)_TempAmount / _item.stacksize);
-            
+
             for (int i = 1; i < requiredSlot; i++)
             {
                 if (EmptySlotCount > 0)
                 {
                     if (i != requiredSlot)
                     {
-                        SetEmptySlot(_item, _item.stacksize);
+                        SetItemToFirstEmptySlot(_item, _item.stacksize);
                         TempAmount -= _item.stacksize;
                     }
                     else
                     {
-                        SetEmptySlot(_item, _TempAmount);
+                        SetItemToFirstEmptySlot(_item, _TempAmount);
                         TempAmount = 0;
                         return true;
                     }
@@ -252,27 +255,30 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            SetEmptySlot(_item, _TempAmount);
+            SetItemToFirstEmptySlot(_item, _TempAmount);
             TempAmount -= _TempAmount;
         }
-       
+
 
         _TempAmount = TempAmount;
         return false;
     }
 
-    public void ChangeSlotWithItem(int slotIndex, ItemObject item, int amount)
+    public void ChangeSlotWithThisValues(int slotIndex, ItemObject item, int amount)
     {
+        if (amount <= 0) {
+            slots[slotIndex].Clear();
+        }
+        else {
+            slots[slotIndex].SetValues(item, amount);
+        }
 
-        slots[slotIndex].SetValues(item, amount);
-        
         changedSlots.Add(slots[slotIndex]);
         UpdateUI();
     }
 
     private void UpdateUI()
-    {       
-        Debug.Log(changedSlots.Count);
+    {
         displayer.UpdateInventoryUI(changedSlots);
         changedSlots = new List<Slot>();
     }

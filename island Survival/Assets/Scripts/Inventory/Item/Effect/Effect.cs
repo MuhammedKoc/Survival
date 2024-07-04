@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Inventory.Item;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="New  Effect", menuName ="Inventory/Effect/New Effect")]
 public class Effect : ScriptableObject
 {
     public string Name;
@@ -12,9 +12,7 @@ public class Effect : ScriptableObject
     [HideInInspector]
     public int value;
 
-    public FloatVariable variable;
-
-    public virtual void Use()
+    public virtual void Use(EffectChangeType changeType)
     {
 
     }

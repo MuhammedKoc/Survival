@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Item : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Item : PooledObject
 {
+    
     public ItemObject item;
     [Tooltip("Non-stackable items cannot have more than 1 amount")]
     public int Amount;
-    
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Deneme");
-    }
+    public bool isMagnetable = false;
 
-    public void OnPointerExit(PointerEventData eventData)
+    [SerializeField]
+    private SpriteRenderer sprite;
+
+    public void Init(ItemObject item, int amount)
     {
-        throw new System.NotImplementedException();
+        this.item = item;
+        this.Amount = amount;
+
+        sprite.sprite = item.icon;
     }
 }

@@ -4,26 +4,54 @@ using UnityEngine;
 using DG.Tweening;
 public class ItemDropper : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
+    [SerializeField]
+    private Item itemPrefab;
 
-    public void ItemDrop(ItemObject item, int Amount)
-    {
-        //Her item in ayrı prefabı olmasına gerek yok. Item prefab olur Init ile değiştirilir
-        
-        GameObject ItemGb = Instantiate(item.Prefab);
-        ItemGb.transform.position = Player.transform.position;
+    [SerializeField]
+    private float dropDistance;
 
-        ItemGb.GetComponent<Item>().Amount = Amount;
-
-        StartCoroutine(IgnoreOverlap(ItemGb));
-        Vector2 pos = new Vector2(Player.transform.position.x + (PlayerController.Instance.Move.LastDirection.x*1.5f), Player.transform.position.y+(PlayerController.Instance.Move.LastDirection.y*1.5f));
-        ItemGb.transform.DOMove(pos, 0.5f);
-    }
+    [SerializeField]
+    private float doTweenDuration;
     
-    IEnumerator IgnoreOverlap(GameObject item)
+    #region Singleton
+
+    private static ItemDropper instance = null;
+
+    public static ItemDropper Instance
     {
-        item.layer = 0;
-        yield return new WaitForSeconds(0.5f);
-        item.layer = LayerMask.NameToLayer("Item");
+        get
+        {
+            if (instance == null)
+            {
+                Debug.Log(instance.GetType().Name + "Instance is Null");
+            }
+
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    #endregion
+    
+    public void ItemDrop(ItemObject item, int amount)
+    {
+        Vector2 playerPos = PlayerController.Instance.transform.position;
+        Vector2 lastDirection = PlayerController.Instance.Move.LastDirection;
+        
+        Item itemGO = (Item)ObjectPool.Instance.Get(itemPrefab);
+        itemGO.Init(item, amount);
+        itemGO.transform.position = playerPos;
+        
+        Vector2 destinationPos = new Vector2(playerPos.x + (lastDirection.x*dropDistance), playerPos.y+(lastDirection.y*dropDistance));
+
+        itemGO.isMagnetable = false;
+        itemGO.transform.DOMove(destinationPos, doTweenDuration).OnComplete(() =>
+        {
+            itemGO.isMagnetable = true;
+        });
     }
 }

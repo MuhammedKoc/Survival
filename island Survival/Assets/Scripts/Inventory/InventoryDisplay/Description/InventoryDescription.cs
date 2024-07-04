@@ -1,109 +1,194 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Inventory.InventoryBack;
 using UnityEngine;
-using DG.Tweening;
 using Inventory.InventoryDisplay;
 using UnityEngine.InputSystem;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.UI;
 using MyBox;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventoryDescription : MonoBehaviour
 {
     [SerializeField]
-    private Vector2 DescriptionMouseOffSet;
-    
-    [SerializeField]
-    private GameObject DescriptionObject;
+    private RectTransform descriptionObject;
 
     [SerializeField]
-    private GameObject effectPrefab;
+    private EffectUI effectPrefab;
+
+    #region Values
 
     [Separator("Values")]
+    [SerializeField]
+    private Vector2 mouseOffSet;
+
+    [SerializeField]
+    private Vector2 mouseOffSetOnDrag;
+
+    [Space(5)]
+    
+    [SerializeField]
+    private Vector2 mouseOffSetOnSlotBar;
+    
+    [Space(10)]
+    [SerializeField]
+    private Vector2 pivotOnInventory;
+
+    [SerializeField]
+    private Vector2 pivotOnSlotbar;
+
+    #endregion
+
+    #region References
+
+    [Separator("References")]
     [SerializeField]
     private TMP_Text nameText;
 
     [SerializeField]
     private TMP_Text typeText;
-    
+
     [SerializeField]
     private TMP_Text descriptionText;
-    
+
     [SerializeField]
     private Transform effectsParentTransform;
 
+    #endregion
+
+    #region Privates
+
+    private PointerEventData pointerEventData;
+
+    private ItemObject descriptionItem;
+
+    #endregion
+
+    private void Awake()
+    {
+        pointerEventData = new PointerEventData(EventSystem.current);
+    }
+
     public void SlotDescriptionStart(InventorySlot slot)
     {
-        // if (inventoryDisplayer.GameObjectToSlot[slot].item == null) return;
+        if (InventoryManager.Instance.Displayer.InventoryStatus == InventoryStatusType.InventoryClose) return;
+        if (slot.Item == null) return;
 
-        Debug.Log("Start");
-        
         ItemObject item = slot.Item;
+        descriptionItem = item;
+
+        descriptionObject.gameObject.SetActive(true);
 
         nameText.text = item.ItemName;
         typeText.text = item.type.ToString();
         descriptionText.text = item.Description;
 
-        if (item is FoodObject food)
-        {
-            foreach (Transform child in effectsParentTransform) { Destroy(child); }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(descriptionObject);
+        descriptionObject.ForceUpdateRectTransforms();
 
-            foreach (var effect in food.Effects)
-            {
-                
-            }
-        }
-        
-        // for (int i = 0; i < EffectsTransform.childCount; i++)
-        // {
-        //     EffectsTransform.GetChild(i).gameObject.SetActive(false);
-        // }
-        
-        DescriptionObject.SetActive(true);
+        SetPivotDescription(slot.SlotType);
 
-        // SetDescriptionText(item);
-        //
-        // SetUISizeAndPosition(item);
+        if (item is FoodObject food) SetEffectsUI(food);
     }
 
-    public void SlotDescriptionUpdate(InventorySlot slot)
+    //StateMachine yapıldığında stateUpdate'de olucak
+    private void Update()
     {
-        // if (inventoryDisplayer.GameObjectToSlot[slot].item == null) return;
+        if (InventoryManager.Instance.Displayer.InventoryStatus == InventoryStatusType.InventoryClose) return;
+        
+        pointerEventData.position = Mouse.current.position.ReadValue();
 
-        Debug.Log("Move");
-
-        DescriptionObject.transform.position = Mouse.current.position.ReadValue() + DescriptionMouseOffSet;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+        if (results.Count > 0)
+        {
+            foreach (var r in results)
+            {
+                if (r.gameObject.TryGetComponent<InventorySlot>(out InventorySlot slot))
+                {
+                    CheckItems(slot);
+                    
+                    if (descriptionItem != null)
+                        UpdateDescriptionPos(slot);
+                }
+            }
+        }
     }
 
     public void SlotDescriptionExit()
     {
-        Debug.Log("Exit");
+        descriptionItem = null;
 
-        DescriptionObject.SetActive(false);
+        nameText.text = string.Empty;
+        typeText.text = string.Empty;
+        descriptionText.text = string.Empty;
 
-        RectTransform DescriptionTransform = DescriptionObject.GetComponent<RectTransform>();
-        DescriptionTransform.sizeDelta = new Vector2(DescriptionTransform.sizeDelta.x, 19);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(descriptionObject);
+        foreach (Transform effect in effectsParentTransform)
+        {
+            effect.GetComponent<EffectUI>().ReturnToPool();
+        }
+
+        descriptionObject.gameObject.SetActive(false);
     }
-    private void SetEffectsUI(ItemObject item)
+
+    private void SetEffectsUI(FoodObject food)
     {
-        FoodObject foodItem = (FoodObject)item;
-        
-        // for (int i = 0; i < foodItem.Effects.Length; i++)
-        // {
-        //    Transform effectTransform = EffectsTransform.GetChild(i);
-        //    EffectSlot effectSlot = foodItem.Effects[i];
-        //    
-        //    string EffectValue = (effectSlot.value >= 0) ? $"+{effectSlot.value}" : effectSlot.value.ToString();
-        //    
-        //    effectTransform.Find("Icon").GetComponent<Image>().sprite = effectSlot.effect.Icon;
-        //    
-        //    effectTransform.Find("Text").GetComponent<TextMeshProUGUI>().text = EffectValue+ " " + effectSlot.effect.Name;
-        //    
-        //    effectTransform.gameObject.SetActive(true);
-        // }
-        //
-        // DescriptionTransform.sizeDelta = new Vector2(DescriptionTransform.sizeDelta.x, DescriptionTransform.sizeDelta.x + (foodItem.Effects.Length * 1f));
+        foreach (var effectSlot in food.Effects)
+        {
+            EffectUI effectUI = (EffectUI)ObjectPool.Instance.Get(effectPrefab, effectsParentTransform);
+
+            effectUI.Init(effectSlot);
+        }
+    }
+
+    public void SetPivotDescription(SlotType type)
+    {
+        switch (type)
+        {
+            case SlotType.Inventory:
+                descriptionObject.pivot = pivotOnInventory;
+                break;
+            case SlotType.Slotbar:
+                descriptionObject.pivot = pivotOnSlotbar;
+                break;
+        }
+    }
+
+    private void CheckItems(InventorySlot slot)
+    {
+        if (slot.Item != null && descriptionItem == null)
+        {
+            SlotDescriptionStart(slot);
+        } 
+        else if (descriptionItem != null && slot.Item != null && slot.Item != descriptionItem)
+        {
+            SlotDescriptionExit();
+
+            SlotDescriptionStart(slot);
+        }
+        else if (slot.Item == null)
+            SlotDescriptionExit();
+    }
+
+    private void UpdateDescriptionPos(InventorySlot slot)
+    {
+        Vector2 offSet = Vector2.zero;
+        switch (slot.SlotType)
+        {
+            case SlotType.Inventory:
+                offSet = (InventoryManager.Instance.Displayer.InventoryStatus ==
+                          InventoryStatusType.ItemOnDrag)
+                    ? mouseOffSetOnDrag
+                    : mouseOffSet;
+                break;
+            case SlotType.Slotbar:
+                offSet = mouseOffSetOnSlotBar;
+                break;
+        }
+
+        descriptionObject.transform.position = Mouse.current.position.ReadValue() + offSet;
     }
 }
-

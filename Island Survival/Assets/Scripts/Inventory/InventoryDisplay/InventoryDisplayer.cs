@@ -26,7 +26,6 @@ public class InventoryDisplayer : MonoBehaviour
     public InventoryStatusType InventoryStatus;
 
     public bool CanOpenInventory;
-
     
     #region Privates
 
@@ -44,12 +43,12 @@ public class InventoryDisplayer : MonoBehaviour
 
     void Start()
     {
-        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenInvetory();
+        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenCloseInvetory();
     }
 
     private void OnDestroy()
     {
-        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenInvetory();
+        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenCloseInvetory();
 
     }
 
@@ -81,37 +80,28 @@ public class InventoryDisplayer : MonoBehaviour
         }
     }
 
-    public void OpenInvetory()
+    public void OpenCloseInvetory()
     {
-        if (InventoryStatus == InventoryStatusType.InventoryClose || InventoryStatus == InventoryStatusType.InventoryOpen)
+        if (InventoryStatus == InventoryStatusType.InventoryClose)
         {
-            inventorySlotsParent.gameObject.SetActive(!inventorySlotsParent.gameObject.activeSelf);
-            if(InventoryStatus == InventoryStatusType.InventoryClose) InventoryStatus = InventoryStatusType.InventoryOpen;
-            else if(InventoryStatus == InventoryStatusType.InventoryOpen) InventoryStatus = InventoryStatusType.InventoryClose;
+            inventorySlotsParent.gameObject.SetActive(true);
+            InventoryStatus = InventoryStatusType.InventoryOpen;
+        }
+        else if (InventoryStatus == InventoryStatusType.InventoryOpen)
+        {
+            inventorySlotsParent.gameObject.SetActive(false);
+            InventoryStatus = InventoryStatusType.InventoryClose;
+
+            InventoryManager.Instance.Description.SlotDescriptionExit();
         }
     }
 
-    public void UseSlot(InventorySlotObsolote slotObsolote)
-    {   
-        slotObsolote.item.Use();
-
-        slotObsolote.Amount--;
-
-        if (slotObsolote.Amount == 0)
-        {
-            slotObsolote.Clear();
-        }
-
-        // UpdateSlotBarUI();
-    }
-
-    public void SelectSlotbarSlot(int index)
+    public void SelectSlotbarSlotByIndex(int index)
     {
         InventorySlotBars[index].GetComponent<Button>().Select();
     }
     
-    
-    public int GetSlotIndex(InventorySlot slot)
+    public int GetSlotIndexBySlot(InventorySlot slot)
     {
         if (InventorySlots.Contains(slot))
         {
@@ -125,6 +115,18 @@ public class InventoryDisplayer : MonoBehaviour
         {
             Debug.LogError("Not Found Slot In Slot Lists");
             return -1;
+        }
+    }
+    
+    public InventorySlot GetSlotByIndex(int index)
+    {
+        if (index < 0) return null;
+
+        if (index < InventoryManager.Instance.SlotbarSlotCount) {
+            return InventorySlotBars[index];
+        }
+        else {
+            return InventorySlots[index];
         }
     }
 }

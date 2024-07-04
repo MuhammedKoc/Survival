@@ -27,17 +27,5 @@ namespace Inventory.InventoryBack
             item = null;
             Amount = 0;
         }
-
-        public void ChangeValues(ref InventorySlotObsolote value)
-        {
-            ItemObject tempItem = item;
-            int tempAmount = Amount;
-
-            item = value.item;
-            Amount = value.Amount;
-
-            value.item = tempItem;
-            value.Amount = tempAmount;
-        }
     }
 }

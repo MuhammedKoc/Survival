@@ -27,40 +27,23 @@ public class SurivalStatus : MonoBehaviour
 
     [Header("Hunger")]
     public SurvivalStat Hungry;
-    [SerializeField] GameObject HungerBar;
+    [SerializeField] Image HungerBar;
 
     [Header("Thirst")]
     public SurvivalStat Thirst;
-    [SerializeField] GameObject ThirstBar;
+    [SerializeField] Image ThirstBar;
 
     private void Awake()
     {
         instance = this;
-        DontDestroyOnLoad(this);
 
         Hungry = new SurvivalStat(50, HungerBar);
         Thirst = new SurvivalStat(50, ThirstBar);
-
-
-
-
-
-
     }
 
     private void Start()
     {
-        PlayerHealth.Instance.Decrease(25);
-    }
-
-    public void Decrease(int asasd)
-    {
-        Hungry.Decrease(asasd);
-    }
-
-    public void increase(int asasd)
-    {
-        Hungry.Increase(asasd);
+        
     }
 
     private void OnEnable()
@@ -106,14 +89,14 @@ public class SurvivalStat
 {
     public int Statvalue { get; private set; }
     public int StatMaxValue { get; private set; }
-    GameObject Bar;
+    private Image bar;
     public event Action<int> ChangeStat;
 
 
-    public SurvivalStat(int statMaxValue, GameObject bar)
+    public SurvivalStat(int statMaxValue, Image bar)
     {
         StatMaxValue = statMaxValue;
-        Bar = bar;
+        this.bar = bar;
 
         Statvalue = statMaxValue;
     }
@@ -142,6 +125,6 @@ public class SurvivalStat
 
     public void UpdateUI()
     {
-        Bar.GetComponent<Image>().fillAmount = (float)Statvalue / StatMaxValue;
+        bar.fillAmount = (float)Statvalue / StatMaxValue;
     }
 }

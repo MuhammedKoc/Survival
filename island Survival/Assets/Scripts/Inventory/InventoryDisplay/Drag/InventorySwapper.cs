@@ -12,9 +12,7 @@ public class InventorySwapper : MonoBehaviour
 {
     InventoryDisplayer displayer;
     ItemDropper dropper;
-    SlotSelector slotSelector;
-
-    [SerializeField] InventoryObject inventory;
+    Slotbar slotbar;
 
     [SerializeField] DragItem OnDragItem;
     [SerializeField] DragItemUI DragObject;
@@ -25,7 +23,7 @@ public class InventorySwapper : MonoBehaviour
     {
         displayer = GetComponent<InventoryDisplayer>();
         dropper = GetComponent<ItemDropper>();
-        slotSelector = GetComponent<SlotSelector>();
+        slotbar = GetComponent<Slotbar>();
 
         OnDragItem = new DragItem(null, 0);
     }
@@ -74,20 +72,11 @@ public class InventorySwapper : MonoBehaviour
     {
         if (slot.Item == null) return;
         
-        if (OnDragItem.item == null)
-        {
-            OnDragItem.item = slot.Item;
-            OnDragItem.amount = slot.Amount;
-        }
-        else
-        {
-            if (OnDragItem.item != slot.Item) return;
-            OnDragItem.amount += slot.Amount;
-        }
+        SetDragItemValuesBySlotAndAmount(slot, slot.Amount);
 
-        InventoryManager.Instance.ChangeSlotWithItem(displayer.GetSlotIndex(slot), null, 0);
+        InventoryManager.Instance.ChangeSlotWithThisValues(displayer.GetSlotIndexBySlot(slot), null, 0);
         
-        SetDragItem();
+        SetDragItemUI();
 
         displayer.InventoryStatus = InventoryStatusType.ItemOnDrag;
     }
@@ -96,6 +85,62 @@ public class InventorySwapper : MonoBehaviour
     {
         if (slot.Item == null) return;
         
+        SetDragItemValuesBySlotAndAmount(slot, amount);
+
+        if (OnDragItem.item != slot.Item) return;
+        
+        if (slot.Amount - amount > 0)
+            InventoryManager.Instance.ChangeSlotWithThisValues(displayer.GetSlotIndexBySlot(slot), slot.Item, slot.Amount-amount);
+        else
+            InventoryManager.Instance.ChangeSlotWithThisValues(displayer.GetSlotIndexBySlot(slot), null, 0);
+        
+        SetDragItemUI();
+        displayer.InventoryStatus = InventoryStatusType.ItemOnDrag;
+    }
+
+    private void PlaceItemToSlot(InventorySlot slot)
+    {
+        if(slot.Item == null)
+        {
+            ChangeSlotAmountOnItemMatch(slot, OnDragItem.amount);
+        }
+        else
+        {
+            if(OnDragItem.item == slot.Item && slot.Item.stackable)
+            {
+                if (slot.Item.stacksize > slot.Amount + OnDragItem.amount)
+                {
+                    ChangeSlotAmountOnItemMatch(slot, slot.Amount+OnDragItem.amount);
+                }
+                else
+                {
+                    int remain = OnDragItem.amount - (slot.Item.stacksize - slot.Amount);
+                    
+                    InventoryManager.Instance.ChangeSlotWithThisValues(displayer.GetSlotIndexBySlot(slot), slot.Item,
+                        slot.Item.stacksize);
+                    
+                    OnDragItem.amount = remain;
+                    
+                    SetDragItemUI();
+                };
+
+                
+            }
+            else
+            {
+                Slot tempSlot = new Slot(-1, slot.Item, slot.Amount);
+                
+                InventoryManager.Instance.ChangeSlotWithThisValues(displayer.GetSlotIndexBySlot(slot), OnDragItem.item, OnDragItem.amount);
+                
+                OnDragItem = new DragItem(tempSlot.item, tempSlot.Amount);
+                
+                SetDragItemUI();
+            }
+        }
+    }
+
+    private void SetDragItemValuesBySlotAndAmount(InventorySlot slot, int amount)
+    {
         if (OnDragItem.item == null)
         {
             OnDragItem.item = slot.Item;
@@ -106,75 +151,33 @@ public class InventorySwapper : MonoBehaviour
             if (OnDragItem.item == slot.Item)
                 OnDragItem.amount += amount;
         }
-
-        if (OnDragItem.item != slot.Item) return;
-        
-        if (slot.Amount - amount > 0)
-            InventoryManager.Instance.ChangeSlotWithItem(displayer.GetSlotIndex(slot), slot.Item, slot.Amount-amount);
-        else
-            InventoryManager.Instance.ChangeSlotWithItem(displayer.GetSlotIndex(slot), null, 0);
-        
-        SetDragItem();
-        displayer.InventoryStatus = InventoryStatusType.ItemOnDrag;
     }
 
-    private void PlaceItemToSlot(InventorySlot slot)
-    {
-        if(slot.Item == null)
-        {
-            Debug.Log("DragClose");
-
-            DragObject.gameObject.SetActive(false);
-            
-            InventoryManager.Instance.ChangeSlotWithItem(displayer.GetSlotIndex(slot), OnDragItem.item, OnDragItem.amount);
-
-            OnDragItem.Clear();
-
-            displayer.InventoryStatus = InventoryStatusType.InventoryOpen;
-        }
-        else
-        {
-            if(OnDragItem.item == slot.Item)
-            {
-                if (slot.Item.stackable && slot.Item.stacksize > slot.Amount + OnDragItem.amount)
-                {
-                    InventoryManager.Instance.ChangeSlotWithItem(displayer.GetSlotIndex(slot), slot.Item, slot.Amount+OnDragItem.amount);
-                }
-                else return;
-
-                DragObject.gameObject.SetActive(false);
-
-                OnDragItem.Clear();
-
-                displayer.InventoryStatus = InventoryStatusType.InventoryOpen;
-            }
-            else
-            {
-                Slot tempSlot = new Slot(-1, slot.Item, slot.Amount);
-                
-                InventoryManager.Instance.ChangeSlotWithItem(displayer.GetSlotIndex(slot), OnDragItem.item, OnDragItem.amount);
-                
-                OnDragItem = new DragItem(tempSlot.item, tempSlot.Amount);
-                
-                SetDragItem();
-            }
-        }
-    }
-
-    void SetDragItem()
+    void SetDragItemUI()
     {
         DragObject.gameObject.SetActive(true);
         DragObject.ChangeUI(OnDragItem.item.icon, OnDragItem.amount);
     }
 
-    public void DropItemOnDrag()
+    // Changing the slot amount by the specified amount when the slot and ItemDrag's item are the same and closing the item drag
+    private void ChangeSlotAmountOnItemMatch(InventorySlot slot, int amount)
     {
-        if (OnDragItem.item == null) return;
-        // dropper.ItemDrop(OnDragItem.item, OnDragItem.Amount);
-        // OnDragItem.Clear();
-        // DragObject.SetActive(false);
-        //
-        // displayer.InventoryStatus = InventoryStatusType.InventoryOpen;
+        InventoryManager.Instance.ChangeSlotWithThisValues(displayer.GetSlotIndexBySlot(slot), slot.Item, amount);
+        
+        DragObject.gameObject.SetActive(false);
+        OnDragItem.Clear();
+
+        displayer.InventoryStatus = InventoryStatusType.InventoryOpen;
+    }
+
+    public void DropItemOnDragSpaceArea()
+    {
+        if (OnDragItem.item == null && displayer.InventoryStatus != InventoryStatusType.ItemOnDrag) return;
+        ItemDropper.Instance.ItemDrop(OnDragItem.item, OnDragItem.amount);
+        OnDragItem.Clear();
+        DragObject.gameObject.SetActive(false);
+        
+        displayer.InventoryStatus = InventoryStatusType.InventoryOpen;
     }
 }
 

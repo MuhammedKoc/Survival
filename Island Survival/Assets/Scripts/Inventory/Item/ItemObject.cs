@@ -15,7 +15,6 @@ public class ItemObject : ScriptableObject
     public string ItemName;
     public ItemType type;
     public Sprite icon;
-    public GameObject Prefab;
 
     [SerializeField]
 
@@ -30,11 +29,6 @@ public class ItemObject : ScriptableObject
     private void Awake()
     {
         type = ItemType.Default;
-    }
-
-    public virtual void Use()
-    {
-        Debug.Log("Item");
     }
 }
 

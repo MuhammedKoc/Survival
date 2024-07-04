@@ -6,8 +6,12 @@ using UnityEngine.UI;
 
 namespace Inventory.InventoryDisplay
 {
-    public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
+    public class InventorySlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler ,ISelectHandler
     {
+        [SerializeField]
+        private SlotType slotType;
+        public SlotType SlotType => slotType;
+        
         [SerializeField]
         private InventorySlotUI ui;
 
@@ -47,17 +51,20 @@ namespace Inventory.InventoryDisplay
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            // InventoryManager.Instance.Description.SlotDescriptionStart(this.gameObject);
-        }
-
-        public void OnPointerMove(PointerEventData eventData)
-        {
-            // InventoryManager.Instance.Description.SlotDescriptionUpdate(this.gameObject);
+            InventoryManager.Instance.Description.SlotDescriptionStart(this);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            // InventoryManager.Instance.Description.SlotDescriptionExit();
+            InventoryManager.Instance.Description.SlotDescriptionExit();
+        }
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            if (slotType == SlotType.Slotbar)
+            {
+                InventoryManager.Instance.Slotbar.SetSelectedSlot(this);
+            }
         }
     }
 }

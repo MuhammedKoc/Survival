@@ -1,0 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
+using Inventory.InventoryDisplay;
+using Inventory.Item;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+public class Slotbar : MonoBehaviour
+{
+    [SerializeField]
+    private InventoryDisplayer displayer;
+    
+    //Privates
+    private InventorySlot selectedSlot;
+
+    private void Start()
+    {
+        InputManager.Instance.Controls.UI.Slotbar.performed += OnSlotChangePerformed;
+        InputManager.Instance.Controls.UI.MouseRightClick.performed += OnSlotUse;
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.Instance.Controls.UI.Slotbar.performed -= OnSlotChangePerformed;
+        InputManager.Instance.Controls.UI.MouseRightClick.performed -= OnSlotUse;
+    }
+
+    public void ChangeSlot(int slotIndex)
+    {
+        if(slotIndex >= 0 && slotIndex <= InventoryManager.Instance.SlotbarSlotCount)
+        {
+            displayer.SelectSlotbarSlotByIndex(slotIndex);
+            
+            selectedSlot = displayer.GetSlotByIndex(slotIndex);
+        }
+        else
+        {
+            Debug.Log("Slot Index Error");
+        }
+    }
+
+    public void SlotItemUse()
+    {
+        if (displayer.InventoryStatus != InventoryStatusType.InventoryClose) return;
+        
+        if(selectedSlot == null) return;
+        if (selectedSlot.Item is not UseableItem useableItem) return;
+        
+        useableItem.Use();
+        if (useableItem.amountDecreaseWhenUse)
+        {
+            InventoryManager.Instance.ChangeSlotWithThisValues(displayer.GetSlotIndexBySlot(selectedSlot), selectedSlot.Item, selectedSlot.Amount-1);
+        }
+    }
+
+    private void OnSlotChangePerformed(InputAction.CallbackContext obj)
+    {
+        ChangeSlot(int.Parse(obj.control.name)-1);
+    }
+    
+    private void OnSlotUse(InputAction.CallbackContext obj)
+    {
+        SlotItemUse();
+    }
+
+    public void SetSelectedSlot(InventorySlot slot)
+    {
+        selectedSlot = slot;
+    }
+}

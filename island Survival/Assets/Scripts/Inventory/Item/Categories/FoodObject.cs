@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Inventory.Item;
 using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FoodObject", menuName = "Inventory/New Food Object")]
-public class FoodObject : ItemObject
+public class FoodObject : UseableItem
 {
+    public EffectSlot[] Effects;
+    
     private void Awake()
     {
         type = ItemType.Food;
     }
 
-    public EffectSlot[] Effects;
+    public override void Use()
+    {
+        foreach (var effectSlot in Effects)
+        {
+            effectSlot.Use();
+        }
+    }
 }
 
 
@@ -23,6 +32,8 @@ public class EffectSlot
     [SerializeField]
     public int value;
 
+    public EffectChangeType changeType;
+    
     [Header("If Effect is SkillEffect")]
     public int Duration;
 
@@ -35,6 +46,6 @@ public class EffectSlot
             skillEffect.Duration = this.Duration;
         }
 
-        effect.Use();
+        effect.Use(changeType);
     }
 }

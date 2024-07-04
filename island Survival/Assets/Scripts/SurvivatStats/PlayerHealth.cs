@@ -40,13 +40,8 @@ public class PlayerHealth : MonoBehaviour, IStatable
     {
         instance = this;
         Health = MaxHealth;
-
-
-    }
-
-    private void Start()
-    {
-        SurivalStatus.Instance.Hungry.Decrease(10);
+        
+        Decrease(25);
     }
 
     public void Increase(int value)
