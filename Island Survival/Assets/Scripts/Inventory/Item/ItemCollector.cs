@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using MyBox;
 using UnityEditor;
 
 public class ItemCollector : MonoBehaviour
 {
-    [Header("Collector Values")]
+    [Separator("Collector Values")]
     [SerializeField]
     private float collectorSize;
 
@@ -20,19 +21,19 @@ public class ItemCollector : MonoBehaviour
 
     [SerializeField]
     private Vector2 magnetOffset;
-
+    
+    [Space(10)]
     [SerializeField]
-    private LayerMask mask;
+    private LayerMask itemLayerMask;
 
-    [SerializeField]
-    private Collider2D[] detectedItems;
-
-    [SerializeField]
-    private Collider2D[] items;
-
+    //TODO: notification managera geçince gerek kalmıyacak Instance ile halledilecek
     [SerializeField]
     private InventoryNotifier Notifier;
 
+    //Privates
+    private Collider2D[] detectedItems;
+    private Collider2D[] items;
+    
     //State'a taşınancak
     private void Update()
     {
@@ -42,7 +43,7 @@ public class ItemCollector : MonoBehaviour
 
     private void ItemMagnetic()
     {
-        detectedItems = Physics2D.OverlapCircleAll(magnetOffset + (Vector2)transform.position, magnetSize, mask);
+        detectedItems = Physics2D.OverlapCircleAll(magnetOffset + (Vector2)transform.position, magnetSize, itemLayerMask);
         foreach (var detectedItem in detectedItems)
         {
             Item _item = detectedItem.GetComponent<Item>();
@@ -57,7 +58,7 @@ public class ItemCollector : MonoBehaviour
 
     private void ItemCollect()
     {
-        items = Physics2D.OverlapCircleAll(collectorOffset + (Vector2)transform.position, collectorSize, mask);
+        items = Physics2D.OverlapCircleAll(collectorOffset + (Vector2)transform.position, collectorSize, itemLayerMask);
         foreach (var item in items)
         {
             Item _item = item.gameObject.GetComponent<Item>();

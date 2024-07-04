@@ -5,6 +5,7 @@ using System.Linq;
 using Inventory.InventoryBack;
 using Inventory.InventoryDisplay;
 using Inventory.Item;
+using MyBox;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class InventoryManager : MonoBehaviour
 {
     #region Side Scripts
 
+    [Separator("Side Scripts")]
     [SerializeField]
     private InventoryDisplayer displayer;
     public InventoryDisplayer Displayer => displayer;
@@ -30,6 +32,7 @@ public class InventoryManager : MonoBehaviour
 
     #endregion
 
+    [Separator("Values")]
     [SerializeField] private int inventorySlotCount;
     public int InventorySlotCount => inventorySlotCount;
 
@@ -73,12 +76,12 @@ public class InventoryManager : MonoBehaviour
 
     private void Show()
     {
-        rootCanvas.SetActive(true);
+        
     }
 
     private void Hide()
     {
-        rootCanvas.SetActive(false);
+        
     }
 
     #endregion

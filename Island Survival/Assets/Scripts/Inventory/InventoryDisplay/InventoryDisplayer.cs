@@ -15,26 +15,22 @@ public class InventoryDisplayer : MonoBehaviour
     [SerializeField]
     private GameObject rootCanvas;
     
-    [SerializeField] private GameObject SlotsGB;
-
+    [Space(10)]
     [SerializeField]
     private Transform inventorySlotsParent;
 
     [SerializeField]
     private Transform slotbarsParent;
     
-    public InventoryStatusType InventoryStatus;
-
-    public bool CanOpenInventory;
+    [HideInInspector] public InventoryStatusType InventoryStatus;
     
     #region Privates
 
-    private List<InventorySlot> InventorySlots = new List<InventorySlot>();
-    private List<InventorySlot> InventorySlotBars = new List<InventorySlot>();
+    private List<InventorySlot> inventorySlots = new List<InventorySlot>();
+    private List<InventorySlot> slotBars = new List<InventorySlot>();
 
     #endregion
     
-    [SerializeField] Sprite ItemNullSprite;
     public void Init(List<Slot> slots)
     {
         SetSlotsList();
@@ -58,11 +54,11 @@ public class InventoryDisplayer : MonoBehaviour
         {
             if (slot.index < 8)
             {
-                InventorySlotBars[slot.index].Init(slot);
+                slotBars[slot.index].Init(slot);
             }
             else
             {
-                InventorySlots[slot.index-InventoryManager.Instance.SlotbarSlotCount].Init(slot);
+                inventorySlots[slot.index-InventoryManager.Instance.SlotbarSlotCount].Init(slot);
             }
         }
     }
@@ -71,12 +67,12 @@ public class InventoryDisplayer : MonoBehaviour
     {
         foreach (Transform slot in slotbarsParent)
         {
-            InventorySlotBars.Add(slot.GetComponent<InventorySlot>());
+            slotBars.Add(slot.GetComponent<InventorySlot>());
         }
         
         foreach (Transform slot in inventorySlotsParent)
         {
-            InventorySlots.Add(slot.GetComponent<InventorySlot>());
+            inventorySlots.Add(slot.GetComponent<InventorySlot>());
         }
     }
 
@@ -98,18 +94,18 @@ public class InventoryDisplayer : MonoBehaviour
 
     public void SelectSlotbarSlotByIndex(int index)
     {
-        InventorySlotBars[index].GetComponent<Button>().Select();
+        slotBars[index].GetComponent<Button>().Select();
     }
     
     public int GetSlotIndexBySlot(InventorySlot slot)
     {
-        if (InventorySlots.Contains(slot))
+        if (inventorySlots.Contains(slot))
         {
-            return InventorySlots.IndexOf(slot) + InventoryManager.Instance.SlotbarSlotCount;
+            return inventorySlots.IndexOf(slot) + InventoryManager.Instance.SlotbarSlotCount;
         }
-        else if (InventorySlotBars.Contains(slot))
+        else if (slotBars.Contains(slot))
         {
-            return InventorySlotBars.IndexOf(slot);
+            return slotBars.IndexOf(slot);
         }
         else
         {
@@ -123,10 +119,10 @@ public class InventoryDisplayer : MonoBehaviour
         if (index < 0) return null;
 
         if (index < InventoryManager.Instance.SlotbarSlotCount) {
-            return InventorySlotBars[index];
+            return slotBars[index];
         }
         else {
-            return InventorySlots[index];
+            return inventorySlots[index];
         }
     }
 }
