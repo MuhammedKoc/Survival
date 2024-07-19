@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using General.ObjectPool;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public PooledObject[] _prefab;
-    public int[] _poolSizes;
-    public List<PooledObject>[] _pools;
+    [SerializeField]
+    private PoolObjectSpawnData[] objectSpawnDatas;
+    
+    private List<PooledObject>[] _pools;
 
     #region Singleton
 
@@ -34,14 +36,14 @@ public class ObjectPool : MonoBehaviour
 
     void Start()
     {
-        _pools = new List<PooledObject>[_prefab.Length];
+        _pools = new List<PooledObject>[objectSpawnDatas.Length];
 
         for (int j = 0; j < _pools.Length; j++)
         {
             _pools[j] = new List<PooledObject>();
-            for (int i = 0; i < _poolSizes[j]; i++)
+            for (int i = 0; i < objectSpawnDatas[j].spawnCountOnStart; i++)
             {
-                PooledObject obj = Instantiate(_prefab[j]) as PooledObject;
+                PooledObject obj = Instantiate(objectSpawnDatas[j].pooledObject) as PooledObject;
                 obj.gameObject.SetActive(false);
                 _pools[j].Add(obj);
             }
@@ -52,9 +54,9 @@ public class ObjectPool : MonoBehaviour
     //array pooledobject
     public PooledObject Get(PooledObject _projectile)
     {
-        for (int i = 0; i < _prefab.Length; i++)
+        for (int i = 0; i < objectSpawnDatas.Length; i++)
         {
-            if (_prefab[i] == _projectile)
+            if (objectSpawnDatas[i].pooledObject == _projectile)
             {
                 for (int j = 0; j < _pools[i].Count; j++)
                 {
@@ -82,9 +84,9 @@ public class ObjectPool : MonoBehaviour
     {
         PooledObject result = null;
 
-        for (int i = 0; i < _prefab.Length; i++)
+        for (int i = 0; i < objectSpawnDatas.Length; i++)
         {
-            if (_prefab[i] == _projectile)
+            if (objectSpawnDatas[i].pooledObject == _projectile)
             {
                 for (int j = 0; j < _pools[i].Count; j++)
                 {
@@ -119,7 +121,7 @@ public class ObjectPool : MonoBehaviour
     //Increase the pool by instantiating another object correctly coorelating to the specified List, make sure it's active, and add it to the correct List.
     private void IncreasePool(int _specifiedPool)
     {
-        PooledObject obj = Instantiate(_prefab[_specifiedPool], parent: null) as PooledObject;
+        PooledObject obj = Instantiate(objectSpawnDatas[_specifiedPool].pooledObject, parent: null) as PooledObject;
         obj.gameObject.SetActive(true);
         _pools[_specifiedPool].Add(obj);
     }

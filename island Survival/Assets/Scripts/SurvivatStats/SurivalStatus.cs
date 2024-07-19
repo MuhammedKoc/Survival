@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SurivalStatus : MonoBehaviour
 {
-    #region Instance
+    #region Singelton
 
     private static SurivalStatus instance;
 
@@ -24,107 +25,168 @@ public class SurivalStatus : MonoBehaviour
     }
     #endregion
 
+    #region Values
 
-    [Header("Hunger")]
-    public SurvivalStat Hungry;
-    [SerializeField] Image HungerBar;
+    [Header("Values")]
+    [SerializeField]
+    private float maxHunger;
+    
+    [SerializeField]
+    private float maxThirst;
 
-    [Header("Thirst")]
-    public SurvivalStat Thirst;
-    [SerializeField] Image ThirstBar;
+    #endregion
+
+    #region Privates
+
+    private float currentHunger;
+
+    private float currentThirst;
+
+    #endregion
 
     private void Awake()
     {
         instance = this;
-
-        Hungry = new SurvivalStat(50, HungerBar);
-        Thirst = new SurvivalStat(50, ThirstBar);
     }
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        currentHunger = maxHunger;
+        currentThirst = maxThirst;
         
+        PlayerHUD.Instance.UpdateHungerBar(currentHunger/maxHunger);
+        PlayerHUD.Instance.UpdateThirstBar(currentThirst/maxThirst);
     }
 
-    private void OnEnable()
-    {
-        Hungry.ChangeStat += OnChangeStat;
-        Thirst.ChangeStat += OnChangeStat;
+    #region Hunger
 
-    }
-
-    private void OnDisable()
+    public void IncreaseHunger(float value)
     {
-        Hungry.ChangeStat -= OnChangeStat;
-        Thirst.ChangeStat -= OnChangeStat;
-    }
-
-    public void OnChangeStat(int survivalStatValue)
-    {
-        switch (survivalStatValue)
+        currentHunger += value;
+        if (currentHunger > maxHunger)
         {
-            case 0:
-                PlayerHealth.Instance.isDegenHealth = true;
+            currentHunger = maxHunger;
+        }
+        
+        CheckValuesForRegenOrDrainHealth();
+        PlayerHUD.Instance.UpdateHungerBar(currentHunger/maxHunger);
+    }
+    
+    public void DecreaseHunger(float value)
+    {
+        currentHunger -= value;
+        if (currentHunger <= 0)
+        {
+            currentHunger = 0;
+        }
+        
+        CheckValuesForRegenOrDrainHealth();
+        PlayerHUD.Instance.UpdateHungerBar(currentHunger/maxHunger);
+    }
 
-                PlayerHealth.Instance.isRegenHealth = false;
-                break;
+    #endregion
+    
+    #region Hunger
 
-            case 50:
-                PlayerHealth.Instance.isDegenHealth = false;
+    public void IncreaseThirst(float value)
+    {
+        currentThirst += value;
+        if (currentThirst > maxThirst)
+        {
+            currentThirst = maxThirst;
+        }
 
-                PlayerHealth.Instance.isRegenHealth = true;
-                break;
+        CheckValuesForRegenOrDrainHealth();
+        PlayerHUD.Instance.UpdateThirstBar(currentThirst/maxThirst);
+    }
+    
+    public void DecreaseThirst(float value)
+    {
+        currentThirst -= value;
+        if (currentThirst <= 0)
+        {
+            currentThirst = 0;
+        }
 
-            case > 0:
-                PlayerHealth.Instance.isDegenHealth = false;
+        CheckValuesForRegenOrDrainHealth();
+        PlayerHUD.Instance.UpdateHungerBar(currentThirst/maxThirst);
+    }
 
-                PlayerHealth.Instance.isRegenHealth = false;
-                break;
+    #endregion
+
+    public void CheckValuesForRegenOrDrainHealth()
+    {
+        if (currentHunger == 0 || currentThirst == 0)
+        {
+            PlayerHealth.Instance.isDrainHealth = true;
+
+            PlayerHealth.Instance.isRegenerateHealth = false;
+        }
+        else if(currentHunger > maxHunger/2 && currentThirst > maxThirst/2)
+        {
+            PlayerHealth.Instance.isDrainHealth = false;
+
+            PlayerHealth.Instance.isRegenerateHealth = true;
+        }
+        else if (currentHunger > 0 || currentThirst > 0)
+        {
+            PlayerHealth.Instance.isDrainHealth = false;
+
+            PlayerHealth.Instance.isRegenerateHealth = false;
         }
     }
 }
 
-[SerializeField]
-public class SurvivalStat
-{
-    public int Statvalue { get; private set; }
-    public int StatMaxValue { get; private set; }
-    private Image bar;
-    public event Action<int> ChangeStat;
+#region Obsolote
 
+// [SerializeField]
+// public class SurvivalStat
+// {
+//     public int Statvalue { get; private set; }
+//     public int StatMaxValue { get; private set; }
+//     private Image bar;
+//     public event Action<int> ChangeStat;
+//
+//
+//     public SurvivalStat(int statMaxValue, Image bar)
+//     {
+//         StatMaxValue = statMaxValue;
+//         this.bar = bar;
+//
+//         Statvalue = statMaxValue;
+//     }
+//
+//     public void Increase(int value)
+//     {
+//         Statvalue += value;
+//         if (Statvalue > StatMaxValue)
+//         {
+//             Statvalue = StatMaxValue;
+//         }
+//         ChangeStat?.Invoke(Statvalue);
+//         UpdateUI();
+//     }
+//
+//     public void Decrease(int value)
+//     {
+//         Statvalue -= value;
+//         if (Statvalue <= 0)
+//         {
+//             Statvalue = 0;
+//         }
+//         ChangeStat?.Invoke(Statvalue);
+//         UpdateUI();
+//     }
+//
+//     public void UpdateUI()
+//     {
+//         bar.fillAmount = (float)Statvalue / StatMaxValue;
+//     }
+// }
 
-    public SurvivalStat(int statMaxValue, Image bar)
-    {
-        StatMaxValue = statMaxValue;
-        this.bar = bar;
-
-        Statvalue = statMaxValue;
-    }
-
-    public void Increase(int value)
-    {
-        Statvalue += value;
-        if (Statvalue > StatMaxValue)
-        {
-            Statvalue = StatMaxValue;
-        }
-        ChangeStat?.Invoke(Statvalue);
-        UpdateUI();
-    }
-
-    public void Decrease(int value)
-    {
-        Statvalue -= value;
-        if (Statvalue <= 0)
-        {
-            Statvalue = 0;
-        }
-        ChangeStat?.Invoke(Statvalue);
-        UpdateUI();
-    }
-
-    public void UpdateUI()
-    {
-        bar.fillAmount = (float)Statvalue / StatMaxValue;
-    }
-}
+#endregion

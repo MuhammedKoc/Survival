@@ -17,8 +17,13 @@ public class InventoryDisplayer : MonoBehaviour
     
     [Space(10)]
     [SerializeField]
-    private Transform inventorySlotsParent;
+    private GameObject inventoryPanel;
 
+    [Space(10)]
+    
+    [SerializeField]
+    private Transform inventorySlotsParent;
+    
     [SerializeField]
     private Transform slotbarsParent;
     
@@ -39,13 +44,14 @@ public class InventoryDisplayer : MonoBehaviour
 
     void Start()
     {
-        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenCloseInvetory();
+        InputManager.Controls.Player.OpenInventory.performed += ctx =>  OpenInventory();
+        InputManager.Controls.UI.CloseInventory.performed += ctx =>  CloseInvetory();
     }
 
     private void OnDestroy()
     {
-        InputManager.Instance.Controls.UI.Inventory.performed += ctx =>  OpenCloseInvetory();
-
+        InputManager.Controls.Player.OpenInventory.performed -= ctx =>  OpenInventory();
+        InputManager.Controls.UI.CloseInventory.performed -= ctx =>  CloseInvetory();
     }
 
     public void UpdateInventoryUI(List<Slot> slots)
@@ -76,20 +82,28 @@ public class InventoryDisplayer : MonoBehaviour
         }
     }
 
-    public void OpenCloseInvetory()
+    public void CloseInvetory()
     {
-        if (InventoryStatus == InventoryStatusType.InventoryClose)
-        {
-            inventorySlotsParent.gameObject.SetActive(true);
-            InventoryStatus = InventoryStatusType.InventoryOpen;
-        }
-        else if (InventoryStatus == InventoryStatusType.InventoryOpen)
-        {
-            inventorySlotsParent.gameObject.SetActive(false);
-            InventoryStatus = InventoryStatusType.InventoryClose;
+        if (InventoryStatus != InventoryStatusType.InventoryOpen) return;
+        
+        inventoryPanel.SetActive(false);
+        InventoryStatus = InventoryStatusType.InventoryClose;
 
-            InventoryManager.Instance.Description.SlotDescriptionExit();
-        }
+        InventoryManager.Instance.Description.SlotDescriptionExit();
+        
+        InputManager.Instance.DisableAllMaps();
+        InputManager.Controls.Player.Enable();
+    }
+
+    public void OpenInventory()
+    {
+        if (InventoryStatus != InventoryStatusType.InventoryClose) return;
+        
+        inventoryPanel.SetActive(true);
+        InventoryStatus = InventoryStatusType.InventoryOpen;
+        
+        InputManager.Instance.DisableAllMaps();
+        InputManager.Controls.UI.Enable();
     }
 
     public void SelectSlotbarSlotByIndex(int index)

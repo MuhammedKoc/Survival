@@ -16,14 +16,14 @@ public class Slotbar : MonoBehaviour
 
     private void Start()
     {
-        InputManager.Instance.Controls.UI.Slotbar.performed += OnSlotChangePerformed;
-        InputManager.Instance.Controls.UI.MouseRightClick.performed += OnSlotUse;
+        InputManager.Controls.Player.Slotbar.performed += OnSlotChangePerformed;
+        InputManager.Controls.Player.MouseRightClick.performed += OnSlotUse;
     }
 
     private void OnDestroy()
     {
-        InputManager.Instance.Controls.UI.Slotbar.performed -= OnSlotChangePerformed;
-        InputManager.Instance.Controls.UI.MouseRightClick.performed -= OnSlotUse;
+        InputManager.Controls.Player.Slotbar.performed -= OnSlotChangePerformed;
+        InputManager.Controls.Player.MouseRightClick.performed -= OnSlotUse;
     }
 
     public void ChangeSlot(int slotIndex)

@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    Controls controls;
+    private static Controls controls;
     [SerializeField] Vector2 moveDirection;
     bool isRunning;
     [SerializeField] Vector2 LastDirection;
@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
     
     #endregion
 
-    public Controls Controls => controls;
+    public static Controls Controls => controls;
     
     private void Awake()
     {
@@ -55,5 +55,11 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
+    }
+
+    public void DisableAllMaps()
+    {
+        controls.Player.Disable();
+        controls.UI.Disable();
     }
 }

@@ -81,9 +81,9 @@ public class InventoryDescription : MonoBehaviour
 
         descriptionObject.gameObject.SetActive(true);
 
-        nameText.text = item.ItemName;
-        typeText.text = item.type.ToString();
-        descriptionText.text = item.Description;
+        nameText.text = item.localizedName.GetLocalizedString();
+        typeText.text = item.GetLocalizedType();
+        descriptionText.text = item.localizedDescription.GetLocalizedString();
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(descriptionObject);
         descriptionObject.ForceUpdateRectTransforms();

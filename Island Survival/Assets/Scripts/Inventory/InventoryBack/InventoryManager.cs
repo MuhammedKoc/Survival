@@ -99,6 +99,9 @@ public class InventoryManager : MonoBehaviour
     {
         int _TempAmount = amount;
         bool resultBool = false;
+        
+        Debug.Log("Add Item Test");
+        
         if (item.stackable)
         {
             StackableItemAddAmount(item, amount, ref _TempAmount);
@@ -231,39 +234,31 @@ public class InventoryManager : MonoBehaviour
 
     private bool StackableItemAdd(ItemObject _item, ref int _TempAmount)
     {
-        int TempAmount = _TempAmount;
-
         if (_TempAmount > _item.stacksize)
         {
-            int requiredSlot = (int)Mathf.Ceil((float)_TempAmount / _item.stacksize);
-
-            for (int i = 1; i < requiredSlot; i++)
+            int requiredSlot = Mathf.CeilToInt((float)_TempAmount / _item.stacksize);
+            
+            for (int i = 1; i <= requiredSlot; i++)
             {
-                if (EmptySlotCount > 0)
+                if (EmptySlotCount <= 0) break;
+                
+                if (i == requiredSlot && _TempAmount < _item.stacksize)
                 {
-                    if (i != requiredSlot)
-                    {
-                        SetItemToFirstEmptySlot(_item, _item.stacksize);
-                        TempAmount -= _item.stacksize;
-                    }
-                    else
-                    {
-                        SetItemToFirstEmptySlot(_item, _TempAmount);
-                        TempAmount = 0;
-                        return true;
-                    }
+                    SetItemToFirstEmptySlot(_item, _TempAmount);
+                    _TempAmount = 0;
+                    return true;
                 }
-                else break;
+                
+                SetItemToFirstEmptySlot(_item, _item.stacksize);
+                _TempAmount -= _item.stacksize;
             }
         }
         else
         {
             SetItemToFirstEmptySlot(_item, _TempAmount);
-            TempAmount -= _TempAmount;
+            _TempAmount = 0;
         }
 
-
-        _TempAmount = TempAmount;
         return false;
     }
 

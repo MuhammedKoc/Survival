@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Inventory.Item;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class Effect : ScriptableObject
 {
-    public string Name;
+    public LocalizedString localizedName;
 
     public Sprite Icon;
 

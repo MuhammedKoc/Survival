@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Effects Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Effects
+  m_TableCollectionNameGuidString: d45c254fa978580438184302a523d2b0
+  m_Entries:
+  - m_Id: 1187896254464
+    m_Key: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1292498001920
+    m_Key: Hunger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1919298985984
+    m_Key: Thirsty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1318594961408
+    m_Key: Speed
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1497331845461442577
+  references:
+    version: 2
+    RefIds:
+    - rid: 1497331845461442577
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1721307806833

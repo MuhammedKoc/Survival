@@ -37,6 +37,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""OpenInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""5fbd0267-1b5e-40dd-8c6d-b3529850603b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""19f632fd-0efc-4230-8a05-afe911b843e2"",
@@ -58,6 +67,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""UseSlot"",
                     ""type"": ""Button"",
                     ""id"": ""5f395e13-ae0d-45a6-9ea5-30342d52a7e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseRightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a11b469-6760-4537-9487-f1d04269928b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Slotbar"",
+                    ""type"": ""Button"",
+                    ""id"": ""23a177f7-f582-41f9-b5d7-18fe4dfcd3aa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -152,6 +179,116 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""UseSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""736fec97-5510-4ff1-b59d-ae100668f506"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e49bb4d-42c6-4233-8e88-ab722dfb34e7"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseRightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fd71ae5-5ba2-478b-81e1-af71ca492283"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89c39a99-de37-46ab-9496-06a7fdea06d1"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6967cdd-ab6b-4129-935c-1d0edcb9d12e"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b3a9d1d-2aaa-4414-ae2b-3720bfe6dd09"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60101ba0-6867-4eb4-9576-b975586adf04"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e2d5966-1910-4df9-b0ca-614df2258859"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b611e05-9f23-47ea-8795-68ca96b44f32"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7b59a2c-fea8-46bb-ace5-d2e6025e0e44"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -160,7 +297,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ""id"": ""51da382f-bb27-4eed-84da-a07728a235b8"",
             ""actions"": [
                 {
-                    ""name"": ""Inventory"",
+                    ""name"": ""CloseInventory"",
                     ""type"": ""Button"",
                     ""id"": ""ed3a6f4e-8c7e-42cd-8f1f-aed0bff44f7b"",
                     ""expectedControlType"": ""Button"",
@@ -187,15 +324,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Slotbar"",
-                    ""type"": ""Button"",
-                    ""id"": ""70dda93e-3778-489c-9a3f-4e0a1dbeae9c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""MouseRightClick"",
                     ""type"": ""Button"",
                     ""id"": ""7e7c1b26-8ead-4438-96bd-fca02f40e150"",
@@ -213,7 +341,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Inventory"",
+                    ""action"": ""CloseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -236,94 +364,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MouseLeftClick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""66dd165b-3592-4177-a942-17436343b5cb"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4c88042d-e7b6-4307-840e-a3ce2b1c64cb"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9b89ff8f-d2dd-4b8d-840d-881dd3dd933c"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bbf00b96-2be8-47a6-ba21-02e33fa62831"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f5eac0a3-9ee0-4cb1-83c4-11a2d73605db"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""089d283f-c45c-435d-a671-60ca96f1bc5a"",
-                    ""path"": ""<Keyboard>/6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""09afb605-f5ee-44ca-8914-d5c287bac8ce"",
-                    ""path"": ""<Keyboard>/7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dc8b5159-515a-4357-9a47-06ca7330233d"",
-                    ""path"": ""<Keyboard>/8"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Slotbar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -374,15 +414,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_OpenInventory = m_Player.FindAction("OpenInventory", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_UseSlot = m_Player.FindAction("UseSlot", throwIfNotFound: true);
+        m_Player_MouseRightClick = m_Player.FindAction("MouseRightClick", throwIfNotFound: true);
+        m_Player_Slotbar = m_Player.FindAction("Slotbar", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
+        m_UI_CloseInventory = m_UI.FindAction("CloseInventory", throwIfNotFound: true);
         m_UI_Menu = m_UI.FindAction("Menu", throwIfNotFound: true);
         m_UI_MouseLeftClick = m_UI.FindAction("MouseLeftClick", throwIfNotFound: true);
-        m_UI_Slotbar = m_UI.FindAction("Slotbar", throwIfNotFound: true);
         m_UI_MouseRightClick = m_UI.FindAction("MouseRightClick", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
@@ -449,17 +491,23 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_OpenInventory;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_UseSlot;
+    private readonly InputAction m_Player_MouseRightClick;
+    private readonly InputAction m_Player_Slotbar;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @OpenInventory => m_Wrapper.m_Player_OpenInventory;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @UseSlot => m_Wrapper.m_Player_UseSlot;
+        public InputAction @MouseRightClick => m_Wrapper.m_Player_MouseRightClick;
+        public InputAction @Slotbar => m_Wrapper.m_Player_Slotbar;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -472,6 +520,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @OpenInventory.started += instance.OnOpenInventory;
+            @OpenInventory.performed += instance.OnOpenInventory;
+            @OpenInventory.canceled += instance.OnOpenInventory;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -481,6 +532,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @UseSlot.started += instance.OnUseSlot;
             @UseSlot.performed += instance.OnUseSlot;
             @UseSlot.canceled += instance.OnUseSlot;
+            @MouseRightClick.started += instance.OnMouseRightClick;
+            @MouseRightClick.performed += instance.OnMouseRightClick;
+            @MouseRightClick.canceled += instance.OnMouseRightClick;
+            @Slotbar.started += instance.OnSlotbar;
+            @Slotbar.performed += instance.OnSlotbar;
+            @Slotbar.canceled += instance.OnSlotbar;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -488,6 +545,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @OpenInventory.started -= instance.OnOpenInventory;
+            @OpenInventory.performed -= instance.OnOpenInventory;
+            @OpenInventory.canceled -= instance.OnOpenInventory;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -497,6 +557,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @UseSlot.started -= instance.OnUseSlot;
             @UseSlot.performed -= instance.OnUseSlot;
             @UseSlot.canceled -= instance.OnUseSlot;
+            @MouseRightClick.started -= instance.OnMouseRightClick;
+            @MouseRightClick.performed -= instance.OnMouseRightClick;
+            @MouseRightClick.canceled -= instance.OnMouseRightClick;
+            @Slotbar.started -= instance.OnSlotbar;
+            @Slotbar.performed -= instance.OnSlotbar;
+            @Slotbar.canceled -= instance.OnSlotbar;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -518,19 +584,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Inventory;
+    private readonly InputAction m_UI_CloseInventory;
     private readonly InputAction m_UI_Menu;
     private readonly InputAction m_UI_MouseLeftClick;
-    private readonly InputAction m_UI_Slotbar;
     private readonly InputAction m_UI_MouseRightClick;
     public struct UIActions
     {
         private @Controls m_Wrapper;
         public UIActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
+        public InputAction @CloseInventory => m_Wrapper.m_UI_CloseInventory;
         public InputAction @Menu => m_Wrapper.m_UI_Menu;
         public InputAction @MouseLeftClick => m_Wrapper.m_UI_MouseLeftClick;
-        public InputAction @Slotbar => m_Wrapper.m_UI_Slotbar;
         public InputAction @MouseRightClick => m_Wrapper.m_UI_MouseRightClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
@@ -541,18 +605,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Inventory.started += instance.OnInventory;
-            @Inventory.performed += instance.OnInventory;
-            @Inventory.canceled += instance.OnInventory;
+            @CloseInventory.started += instance.OnCloseInventory;
+            @CloseInventory.performed += instance.OnCloseInventory;
+            @CloseInventory.canceled += instance.OnCloseInventory;
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
             @MouseLeftClick.started += instance.OnMouseLeftClick;
             @MouseLeftClick.performed += instance.OnMouseLeftClick;
             @MouseLeftClick.canceled += instance.OnMouseLeftClick;
-            @Slotbar.started += instance.OnSlotbar;
-            @Slotbar.performed += instance.OnSlotbar;
-            @Slotbar.canceled += instance.OnSlotbar;
             @MouseRightClick.started += instance.OnMouseRightClick;
             @MouseRightClick.performed += instance.OnMouseRightClick;
             @MouseRightClick.canceled += instance.OnMouseRightClick;
@@ -560,18 +621,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Inventory.started -= instance.OnInventory;
-            @Inventory.performed -= instance.OnInventory;
-            @Inventory.canceled -= instance.OnInventory;
+            @CloseInventory.started -= instance.OnCloseInventory;
+            @CloseInventory.performed -= instance.OnCloseInventory;
+            @CloseInventory.canceled -= instance.OnCloseInventory;
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
             @MouseLeftClick.started -= instance.OnMouseLeftClick;
             @MouseLeftClick.performed -= instance.OnMouseLeftClick;
             @MouseLeftClick.canceled -= instance.OnMouseLeftClick;
-            @Slotbar.started -= instance.OnSlotbar;
-            @Slotbar.performed -= instance.OnSlotbar;
-            @Slotbar.canceled -= instance.OnSlotbar;
             @MouseRightClick.started -= instance.OnMouseRightClick;
             @MouseRightClick.performed -= instance.OnMouseRightClick;
             @MouseRightClick.canceled -= instance.OnMouseRightClick;
@@ -641,16 +699,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnRun(InputAction.CallbackContext context);
+        void OnOpenInventory(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnUseSlot(InputAction.CallbackContext context);
+        void OnMouseRightClick(InputAction.CallbackContext context);
+        void OnSlotbar(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
-        void OnInventory(InputAction.CallbackContext context);
+        void OnCloseInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnMouseLeftClick(InputAction.CallbackContext context);
-        void OnSlotbar(InputAction.CallbackContext context);
         void OnMouseRightClick(InputAction.CallbackContext context);
     }
     public interface IInventoryActions

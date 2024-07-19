@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using MyBox;
+using Notification;
 using UnityEditor;
 
 public class ItemCollector : MonoBehaviour
@@ -26,9 +27,8 @@ public class ItemCollector : MonoBehaviour
     [SerializeField]
     private LayerMask itemLayerMask;
 
-    //TODO: notification managera geçince gerek kalmıyacak Instance ile halledilecek
     [SerializeField]
-    private InventoryNotifier Notifier;
+    private NotifyData inventoryFullNotify;
 
     //Privates
     private Collider2D[] detectedItems;
@@ -61,19 +61,29 @@ public class ItemCollector : MonoBehaviour
         items = Physics2D.OverlapCircleAll(collectorOffset + (Vector2)transform.position, collectorSize, itemLayerMask);
         foreach (var item in items)
         {
-            Item _item = item.gameObject.GetComponent<Item>();
-            if (!_item.isMagnetable) return;
+            Item itemGO = item.gameObject.GetComponent<Item>();
+            if (!itemGO.isMagnetable) return;
 
-            if (InventoryManager.Instance.AddItem(_item.item, _item.Amount, out int remainAmount))
+            bool isAddedItems = InventoryManager.Instance.AddItem(itemGO.item, itemGO.Amount, out int remainAmount);
+            
+            if (isAddedItems)
             {
-                Notifier.NotifyItem(_item.item, _item.Amount);
-                _item.ReturnToPool();
-                _item.isMagnetable = true;
+                NotificationManager.Instance.NotifyItem(itemGO.item, itemGO.Amount);
+                
+                itemGO.ReturnToPool();
+                itemGO.isMagnetable = false;
+            }
+            else if(!isAddedItems && remainAmount != itemGO.Amount)
+            {
+                NotificationManager.Instance.NotifyItem(itemGO.item, itemGO.Amount - remainAmount);
+                NotificationManager.Instance.ShowNotify(inventoryFullNotify);
+                itemGO.Amount = remainAmount;
             }
             else
             {
-                Notifier.NotifyItem(_item.item, _item.Amount - remainAmount);
-                _item.Amount = remainAmount;
+                NotificationManager.Instance.ShowNotify(inventoryFullNotify);
+                
+                Debug.Log("Test2");
             }
         }
     }

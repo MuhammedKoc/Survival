@@ -19,7 +19,7 @@ namespace Inventory.InventoryDisplay
         public void Init(EffectSlot effectSlot)
         {
             sprite.sprite = effectSlot.effect.Icon;
-            nameText.text = effectSlot.effect.Name;
+            nameText.text = effectSlot.effect.localizedName.GetLocalizedString();
 
             switch (effectSlot.changeType) {
                 case EffectChangeType.Increase:

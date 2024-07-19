@@ -44,25 +44,25 @@ public class RigidbodyMove : MonoBehaviour
         moveSpeed = movementValues.Speed;
         IsRunable = true;
         
-        InputManager.Instance.Controls.Player.Enable();
+        InputManager.Controls.Player.Enable();
         
-        InputManager.Instance.Controls.Player.Movement.performed += OnMovementPerformed;
-        InputManager.Instance.Controls.Player.Movement.canceled += OnMovementCanceled;
+        InputManager.Controls.Player.Movement.performed += OnMovementPerformed;
+        InputManager.Controls.Player.Movement.canceled += OnMovementCanceled;
 
-        InputManager.Instance.Controls.Player.Run.performed += OnRunPerformed;
-        InputManager.Instance.Controls.Player.Run.canceled += OnRunCanceled;
+        InputManager.Controls.Player.Run.performed += OnRunPerformed;
+        InputManager.Controls.Player.Run.canceled += OnRunCanceled;
     }
 
     private void OnDestroy()
     {
-        InputManager.Instance.Controls.Player.Disable();
+        InputManager.Controls.Player.Disable();
 
         
-        InputManager.Instance.Controls.Player.Movement.performed -= OnMovementPerformed;
-        InputManager.Instance.Controls.Player.Movement.canceled -= OnMovementCanceled;
+        InputManager.Controls.Player.Movement.performed -= OnMovementPerformed;
+        InputManager.Controls.Player.Movement.canceled -= OnMovementCanceled;
 
-        InputManager.Instance.Controls.Player.Run.performed -= OnRunPerformed;
-        InputManager.Instance.Controls.Player.Run.canceled -= OnRunCanceled;
+        InputManager.Controls.Player.Run.performed -= OnRunPerformed;
+        InputManager.Controls.Player.Run.canceled -= OnRunCanceled;
     }
 
     public void Move()

@@ -15,6 +15,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "OpenInventory",
+                    "type": "Button",
+                    "id": "5fbd0267-1b5e-40dd-8c6d-b3529850603b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "19f632fd-0efc-4230-8a05-afe911b843e2",
@@ -36,6 +45,24 @@
                     "name": "UseSlot",
                     "type": "Button",
                     "id": "5f395e13-ae0d-45a6-9ea5-30342d52a7e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseRightClick",
+                    "type": "Button",
+                    "id": "1a11b469-6760-4537-9487-f1d04269928b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Slotbar",
+                    "type": "Button",
+                    "id": "23a177f7-f582-41f9-b5d7-18fe4dfcd3aa",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -130,6 +157,116 @@
                     "action": "UseSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "736fec97-5510-4ff1-b59d-ae100668f506",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e49bb4d-42c6-4233-8e88-ab722dfb34e7",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseRightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0fd71ae5-5ba2-478b-81e1-af71ca492283",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89c39a99-de37-46ab-9496-06a7fdea06d1",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6967cdd-ab6b-4129-935c-1d0edcb9d12e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b3a9d1d-2aaa-4414-ae2b-3720bfe6dd09",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60101ba0-6867-4eb4-9576-b975586adf04",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e2d5966-1910-4df9-b0ca-614df2258859",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b611e05-9f23-47ea-8795-68ca96b44f32",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7b59a2c-fea8-46bb-ace5-d2e6025e0e44",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slotbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -138,7 +275,7 @@
             "id": "51da382f-bb27-4eed-84da-a07728a235b8",
             "actions": [
                 {
-                    "name": "Inventory",
+                    "name": "CloseInventory",
                     "type": "Button",
                     "id": "ed3a6f4e-8c7e-42cd-8f1f-aed0bff44f7b",
                     "expectedControlType": "Button",
@@ -165,15 +302,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Slotbar",
-                    "type": "Button",
-                    "id": "70dda93e-3778-489c-9a3f-4e0a1dbeae9c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MouseRightClick",
                     "type": "Button",
                     "id": "7e7c1b26-8ead-4438-96bd-fca02f40e150",
@@ -191,7 +319,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Inventory",
+                    "action": "CloseInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -214,94 +342,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "MouseLeftClick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "66dd165b-3592-4177-a942-17436343b5cb",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4c88042d-e7b6-4307-840e-a3ce2b1c64cb",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9b89ff8f-d2dd-4b8d-840d-881dd3dd933c",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bbf00b96-2be8-47a6-ba21-02e33fa62831",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f5eac0a3-9ee0-4cb1-83c4-11a2d73605db",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "089d283f-c45c-435d-a671-60ca96f1bc5a",
-                    "path": "<Keyboard>/6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "09afb605-f5ee-44ca-8914-d5c287bac8ce",
-                    "path": "<Keyboard>/7",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dc8b5159-515a-4357-9a47-06ca7330233d",
-                    "path": "<Keyboard>/8",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slotbar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,11 +18,6 @@ public class PlayerStamina : MonoBehaviour
     [Range(0, 50)][SerializeField] float StaminaDrain = 0.5f;
     [Range(0, 50)][SerializeField] float StaminaRegen = 0.5f;
 
-
-
-    [Header("Ui")]
-    [SerializeField] private Image Bar;
-
     [SerializeField]
     private RigidbodyMove move;
 
@@ -36,7 +32,7 @@ public class PlayerStamina : MonoBehaviour
         {
             if(Stamina <= MaxStamina - 0.01)
             {
-                Bar.transform.parent.gameObject.SetActive(true);
+                PlayerHUD.Instance.SetActiveStaminaFrame(true);
                 Stamina += StaminaRegen * Time.deltaTime;
                 UpdateStaminaBar();
 
@@ -44,7 +40,7 @@ public class PlayerStamina : MonoBehaviour
                 {
                     move.IsRunable = true;
                     HasRegenerated = true;
-                    Bar.transform.parent.gameObject.SetActive(false);
+                    PlayerHUD.Instance.SetActiveStaminaFrame(false);
                 }
             }
         }
@@ -54,7 +50,7 @@ public class PlayerStamina : MonoBehaviour
     {
         if(HasRegenerated)
         {
-            Bar.transform.parent.gameObject.SetActive(true);
+            PlayerHUD.Instance.SetActiveStaminaFrame(true);
             AreSprinting = true;
             Stamina-= StaminaDrain * Time.deltaTime;
             UpdateStaminaBar();
@@ -98,7 +94,7 @@ public class PlayerStamina : MonoBehaviour
 
     private void UpdateStaminaBar()
     {
-        Bar.fillAmount = Stamina/MaxStamina;
+        PlayerHUD.Instance.UpdatesStaminaBar(Stamina/MaxStamina);
     }
 
     private IEnumerator RegenerateStamina()

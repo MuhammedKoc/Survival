@@ -19,10 +19,10 @@ public class StatEffect : Effect
                         PlayerHealth.Instance.Increase(value);
                         break;
                     case StatEffectType.Hunger:
-                        SurivalStatus.Instance.Hungry.Increase(value);
+                        SurivalStatus.Instance.IncreaseHunger(value);
                         break;
                     case StatEffectType.Thirst:
-                        SurivalStatus.Instance.Thirst.Increase(value);
+                        SurivalStatus.Instance.IncreaseThirst(value);
                         break;
                 }
                 break;
@@ -34,10 +34,10 @@ public class StatEffect : Effect
                         PlayerHealth.Instance.Decrease(value);
                         break;
                     case StatEffectType.Hunger:
-                        SurivalStatus.Instance.Hungry.Decrease(value);
+                        SurivalStatus.Instance.DecreaseHunger(value);
                         break;
                     case StatEffectType.Thirst:
-                        SurivalStatus.Instance.Thirst.Decrease(value);
+                        SurivalStatus.Instance.DecreaseThirst(value);
                         break;
                 }
                 break;

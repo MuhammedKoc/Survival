@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using DG.Tweening;
+using Player;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
-public class PlayerHealth : MonoBehaviour, IStatable
+public class PlayerHealth : MonoBehaviour
 {
     #region Instance
     
@@ -24,100 +21,97 @@ public class PlayerHealth : MonoBehaviour, IStatable
         }
     }
     #endregion
+    
+    [SerializeField] 
+    private float maxHealth = 100;
+    
+    [Space(10)]
+    
+    [SerializeField,Range(0,10)] 
+    private float healthRegenRate;
+    
+    [SerializeField, Range(0, 10)]
+    private float healthDrainRate;
 
-    [SerializeField] private int Health;
-    [SerializeField] private int MaxHealth = 100;
+    #region Privates
 
-    [SerializeField] private GameObject Bar;
+    private float currentHealth;
+    
+    private Tween regenerateTween;
+    private Tween drainTween;
 
-    [SerializeField,Range(0,10)] float healthRegenRate;
-    [SerializeField, Range(0, 10)] float healtheDegenRate;
-
-    private bool RegenBool;
-    private bool DegenBool;
+    #endregion
 
     private void Awake()
     {
         instance = this;
-        Health = MaxHealth;
         
-        Decrease(25);
+        currentHealth = maxHealth;
     }
 
     public void Increase(int value)
     {
-        Health += value;
-        if(Health > MaxHealth)
+        currentHealth += value;
+        if(currentHealth > maxHealth)
         {
-            Health = MaxHealth;
+            currentHealth = maxHealth;
         }
-        UpdateUI();
+        
+        PlayerHUD.Instance.UpdateHealthBar(currentHealth/maxHealth);
     }
 
     public void Decrease(int value)
     {
-        Health -= value;
-        if(Health <= 0)
+        currentHealth -= value;
+        if(currentHealth <= 0)
         {
-            Health = 0;
+            currentHealth = 0;
             //Ölüm ve Yeniden Doğma
         }
-        UpdateUI();
+        
+        UpdateBar();
     }
 
-    public void UpdateUI()
+    private void UpdateBar()
     {
-        Bar.GetComponent<Image>().fillAmount = (float)Health/MaxHealth;
+        PlayerHUD.Instance.UpdateHealthBar(currentHealth/maxHealth);
     }
 
-    public bool isRegenHealth
+    public bool isRegenerateHealth
     {
         set
         {
             if (value)
             {
-                RegenBool = true;
-                StartCoroutine(RegenerateHealth());
+                if(regenerateTween != null && regenerateTween.IsPlaying()) return;
+                
+                regenerateTween = DOTween.To(() => currentHealth, p => currentHealth = p, maxHealth, currentHealth * healthRegenRate)
+                    .OnUpdate(UpdateBar);
             }
-            else if (!value)
+            else
             {
-                RegenBool = false;
+                regenerateTween.Kill();
             }
         }
         
     }
 
-    public IEnumerator RegenerateHealth()
-    {
-        while (Health < MaxHealth && RegenBool)
-        {
-            Increase(1);
-            yield return new WaitForSeconds(healthRegenRate);
-        }
-    }
-
-    public bool isDegenHealth
+    public bool isDrainHealth
     {
         set
         {
-            if(value)
+            if (value)
             {
-                DegenBool = true;
-                StartCoroutine(DegenerateHealth());
+                if(drainTween != null && drainTween.IsPlaying()) return;
+                
+                drainTween = DOTween.To(() => currentHealth, p => currentHealth = p, 0, currentHealth * healthDrainRate)
+                    .OnUpdate(UpdateBar);
             }
-            else if(!value)
+            else
             {
-                DegenBool = false;
+                drainTween.Kill();
             }
         }
     }
-
-    public IEnumerator DegenerateHealth()
-    {
-        while (Health > 0 && DegenBool)
-        {
-            Decrease(1);
-            yield return new WaitForSeconds(healthRegenRate);
-        }
-    }
+    
 }
