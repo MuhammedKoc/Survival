@@ -9,8 +9,6 @@ using UnityEngine;
 [InitializeOnLoad]
 public static class DefaultSceneLoader
 {
-    public const string LAST_SELECTED_SCENE_KEY = "LastSelectedScene";
-    
     static DefaultSceneLoader()
     {
         EditorApplication.playModeStateChanged += LoadDefaultScene;
@@ -21,14 +19,6 @@ public static class DefaultSceneLoader
         if (state == PlayModeStateChange.ExitingEditMode)
         {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-        }
-
-        if (state == PlayModeStateChange.EnteredPlayMode)
-        {
-            var lastname = EditorSceneManager.GetActiveScene().name;
-            // Build settings te yoksa
-          
-            EditorSceneManager.LoadScene(lastname);
         }
     }
 
