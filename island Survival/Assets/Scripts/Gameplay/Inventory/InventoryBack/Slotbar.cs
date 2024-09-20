@@ -30,9 +30,13 @@ public class Slotbar : MonoBehaviour
     {
         if(slotIndex >= 0 && slotIndex <= InventoryManager.Instance.SlotbarSlotCount)
         {
-            displayer.SelectSlotbarSlotByIndex(slotIndex);
+            // displayer.SelectSlotbarSlotByIndex(slotIndex);
+            
+            if(selectedSlot != null)
+                selectedSlot.Unselect();
             
             selectedSlot = displayer.GetSlotByIndex(slotIndex);
+            selectedSlot.Select();
         }
         else
         {
@@ -66,6 +70,7 @@ public class Slotbar : MonoBehaviour
 
     public void SetSelectedSlot(InventorySlot slot)
     {
+        selectedSlot.Unselect();
         selectedSlot = slot;
     }
 }

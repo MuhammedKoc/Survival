@@ -7,7 +7,6 @@ using Inventory.InventoryDisplay;
 using Inventory.Item;
 using MyBox;
 using Tmn.Data;
-using Tmn.Data.DataPersistence;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -65,35 +64,21 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     private void Awake()
     {
         instance = this;
-
-        // Init();
     }
 
     #endregion
 
-    #region Show & Hide
-
-    [SerializeField]
-    private GameObject rootCanvas;
-
-    private void Show()
+    void Start()
     {
-        
+        InputManager.Controls.Player.OpenInventory.performed += ctx =>  displayer.OpenInventory();
+        InputManager.Controls.UI.CloseInventory.performed += ctx =>  displayer.CloseInvetory();
     }
 
-    private void Hide()
+    private void OnDestroy()
     {
-        
+        InputManager.Controls.Player.OpenInventory.performed -= ctx =>  displayer.OpenInventory();
+        InputManager.Controls.UI.CloseInventory.performed -= ctx =>  displayer.CloseInvetory();
     }
-
-    #endregion
-    
-    // public void Init()
-    // {
-    //     slots = new List<Slot>();
-    //
-    //     ClearSlots();
-    // }
 
     public bool AddItem(ItemObject item, int amount, out int remainAmount)
     {

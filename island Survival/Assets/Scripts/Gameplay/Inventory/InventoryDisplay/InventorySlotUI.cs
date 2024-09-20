@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Inventory.InventoryDisplay
 {
-    public class InventorySlotUI : MonoBehaviour, ISelectHandler, IDeselectHandler
+    public class InventorySlotUI : MonoBehaviour
     {
         [SerializeField]
         private Image sprite;
@@ -54,12 +54,12 @@ namespace Inventory.InventoryDisplay
             amountText.gameObject.SetActive(false);
         }
         
-        public void OnSelect(BaseEventData eventData)
+        public void Select()
         {
             slotSprite.sprite = selectedSlotSprite;
         }
 
-        public void OnDeselect(BaseEventData eventData)
+        public void UnSelect()
         {
             slotSprite.sprite = defaultSlotSprite;
 

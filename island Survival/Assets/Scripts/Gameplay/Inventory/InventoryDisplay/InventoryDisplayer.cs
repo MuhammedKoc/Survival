@@ -42,17 +42,7 @@ public class InventoryDisplayer : MonoBehaviour
         UpdateInventoryUI(slots);
     }
 
-    void Start()
-    {
-        InputManager.Controls.Player.OpenInventory.performed += ctx =>  OpenInventory();
-        InputManager.Controls.UI.CloseInventory.performed += ctx =>  CloseInvetory();
-    }
-
-    private void OnDestroy()
-    {
-        InputManager.Controls.Player.OpenInventory.performed -= ctx =>  OpenInventory();
-        InputManager.Controls.UI.CloseInventory.performed -= ctx =>  CloseInvetory();
-    }
+   
 
     public void UpdateInventoryUI(List<Slot> slots)
     {
@@ -91,8 +81,7 @@ public class InventoryDisplayer : MonoBehaviour
 
         InventoryManager.Instance.Description.SlotDescriptionExit();
         
-        InputManager.Instance.DisableAllMaps();
-        InputManager.Controls.Player.Enable();
+        Player.Instance.StateMachine.ChangeState(Player.Instance.IdleState);
     }
 
     public void OpenInventory()
@@ -102,13 +91,12 @@ public class InventoryDisplayer : MonoBehaviour
         inventoryPanel.SetActive(true);
         InventoryStatus = InventoryStatusType.InventoryOpen;
         
-        InputManager.Instance.DisableAllMaps();
-        InputManager.Controls.UI.Enable();
+        Player.Instance.StateMachine.ChangeState(Player.Instance.UIState);
     }
 
     public void SelectSlotbarSlotByIndex(int index)
     {
-        slotBars[index].GetComponent<Button>().Select();
+        slotBars[index].Select();
     }
     
     public int GetSlotIndexBySlot(InventorySlot slot)
