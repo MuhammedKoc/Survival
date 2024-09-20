@@ -7,8 +7,10 @@ using UnityEngine.Serialization;
 
 public class RigidbodyMove : MonoBehaviour
 {
-    [SerializeField] MovementValuesObject movementValues;
-
+    [SerializeField] 
+    private MovementValuesObject movementValues;
+    public MovementValuesObject MovementValues => movementValues;
+    
     [SerializeField]
     private PlayerStamina playerStamina;
 
@@ -24,6 +26,8 @@ public class RigidbodyMove : MonoBehaviour
     [HideInInspector]
     public Vector2 MoveDirection => moveDirection;
 
+    public bool IsRunning;
+    
     public bool IsRunable;
 
     #endregion
@@ -31,8 +35,6 @@ public class RigidbodyMove : MonoBehaviour
     #region Privates
 
     private float moveSpeed;
-    
-    private bool isRunning;
     
     private Vector2 lastDirection;
     private Vector2 moveDirection;
@@ -65,37 +67,9 @@ public class RigidbodyMove : MonoBehaviour
         InputManager.Controls.Player.Run.canceled -= OnRunCanceled;
     }
 
-    public void Move()
+    public void SetVelocity(Vector2 value)
     {
-        if (!isRunning)
-        {
-            playerStamina.AreSprinting = false;
-        }
-
-        if (isRunning && rb.velocity.magnitude > 0)
-        {
-            if(playerStamina.Stamina > 0)
-            {
-                //stamina.AreSprinting = true;
-                playerStamina.StaminaRuninng();
-            }
-            else
-            {
-                isRunning = false;
-            }
-        }
-
-        moveSpeed = GetMoveSpeed();
-        Vector2 move = moveDirection.normalized * Time.fixedDeltaTime * moveSpeed * 50;
-        
-        rb.velocity = move;
-    }
-
-    private float GetMoveSpeed()
-    {
-        if (!IsRunable) return movementValues.Speed;
-
-        return (isRunning) ? movementValues.RunSpeed : movementValues.Speed;
+        rb.velocity = value;
     }
     
     #region Inputs
@@ -114,14 +88,12 @@ public class RigidbodyMove : MonoBehaviour
     
     private void OnRunPerformed(InputAction.CallbackContext obj)
     {
-        isRunning = true;
-        
-        Debug.Log(IsRunable);
+        IsRunning = true;
     }
 
     private void OnRunCanceled(InputAction.CallbackContext obj)
     {
-        isRunning = false;
+        IsRunning = false;
     }
     #endregion
     

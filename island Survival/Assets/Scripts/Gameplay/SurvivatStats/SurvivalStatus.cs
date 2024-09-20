@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Player;
+using Tmn;
 using Tmn.Data;
-using Tmn.Data.DataPersistence;
 using UnityEngine;
 using UnityEngine.UI;
 

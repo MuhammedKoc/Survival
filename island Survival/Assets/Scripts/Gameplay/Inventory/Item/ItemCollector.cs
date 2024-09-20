@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using System;
 using MyBox;
 using Notification;
-using UnityEditor;
+using Tmn.Debugs;
 
 public class ItemCollector : MonoBehaviour
 {

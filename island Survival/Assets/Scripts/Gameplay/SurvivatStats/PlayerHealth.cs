@@ -1,8 +1,7 @@
 using System.Collections;
 using DG.Tweening;
-using Player;
+using Tmn;
 using Tmn.Data;
-using Tmn.Data.DataPersistence;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDataPersistence

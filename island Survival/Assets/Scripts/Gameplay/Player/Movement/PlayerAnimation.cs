@@ -12,7 +12,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void UpdateAnimation()
     {
-        Vector2 direction = PlayerController.Instance.Move.MoveDirection;
+        Vector2 direction = Player.Instance.Move.MoveDirection;
         if (direction.x != 0 || direction.y != 0)
         {
             animator.SetBool("IsIdle", false);
@@ -21,7 +21,7 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (direction.x == 0 && direction.y == 0)
         {
-            Vector2 LastDir = PlayerController.Instance.Move.LastDirection;
+            Vector2 LastDir = Player.Instance.Move.LastDirection;
             animator.SetBool("IsIdle", true);
             animator.SetFloat("LastHorizontal", LastDir.x);
             animator.SetFloat("LastVertical", LastDir.y);

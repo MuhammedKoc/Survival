@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0068e77b50cf94e8bd995da9140a34, type: 3}
   m_Name: Movement Value
   m_EditorClassIdentifier: 
-  Speed: 4
+  Speed: 6
   RunSpeed: 8
   RunStaminaCost: 0
   DashSpeed: 10

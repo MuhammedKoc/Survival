@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Editor;
-using Tmn.Debug;
+using Tmn.Debugs;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;

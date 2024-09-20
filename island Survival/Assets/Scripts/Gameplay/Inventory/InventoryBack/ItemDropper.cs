@@ -39,8 +39,8 @@ public class ItemDropper : MonoBehaviour
     
     public void ItemDrop(ItemObject item, int amount)
     {
-        Vector2 playerPos = PlayerController.Instance.transform.position;
-        Vector2 lastDirection = PlayerController.Instance.Move.LastDirection;
+        Vector2 playerPos = Player.Instance.transform.position;
+        Vector2 lastDirection = Player.Instance.Move.LastDirection;
         
         Item itemGO = (Item)ObjectPool.Instance.Get(itemPrefab);
         itemGO.Init(item, amount);
