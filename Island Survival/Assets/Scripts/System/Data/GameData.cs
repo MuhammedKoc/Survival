@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Inventory.InventoryBack;
-using Inventory.InventoryDisplay;
 
 namespace Tmn.Data
 {

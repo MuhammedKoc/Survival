@@ -1,134 +1,164 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Inventory.InventoryBack;
 using MyBox;
-using Tmn.Data;
-using Tmn.Data.DataPersistence;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
+using Tmn.Debugs;
 using UnityEngine;
 
-public class DataPersistenceManager : MonoBehaviour
+namespace Tmn.Data
 {
-    #region Singleton
-
-    private static DataPersistenceManager instance = null;
-
-    public static DataPersistenceManager Instance
+    public class DataPersistenceManager : MonoBehaviour
     {
-        get
+        #region Singleton
+
+        private static DataPersistenceManager instance = null;
+
+        public static DataPersistenceManager Instance
         {
-            if (instance == null)
+            get
             {
-                Debug.Log(instance.GetType().Name + "Instance is Null");
+                if (instance == null)
+                {
+                    DebugHelper.LogSystem(instance.GetType().Name + "Instance is Null");
+                }
+
+                return instance;
+            }
+        }
+
+        private void Awake()
+        {
+            instance = this;
+        }
+
+        #endregion
+
+        [Header("File Storage Confif")]
+        [SerializeField]
+        private string fileName;
+
+        [SerializeField]
+        private bool useEncryption;
+
+
+        #region Privates
+
+        private GameData data;
+        private FileDataHandler dataHandler;
+
+        #endregion
+
+        private List<IDataPersistence> dataPersistences = new List<IDataPersistence>();
+
+        private void Start()
+        {
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+            dataPersistences = FindAllIDataPersistences();
+            LoadGame();
+        }
+
+        private void OnApplicationQuit()
+        {
+            SaveGame();
+        }
+
+        public void SaveGame()
+        {
+            foreach (IDataPersistence dataPersistence in dataPersistences)
+            {
+                dataPersistence.SaveData(ref data);
             }
 
-            return instance;
+            dataHandler.Save(data);
+
+            DebugHelper.LogSystem("Game Saved");
         }
-    }
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
-    #endregion
-    
-    [Header("File Storage Confif")]
-    [SerializeField]
-    private string fileName;
-
-
-    #region Privates
-
-    private GameData data;
-    private FileDataHandler dataHandler;
-
-    #endregion
-
-    private List<IDataPersistence> dataPersistences = new List<IDataPersistence>();
-
-    private void Start()
-    {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        dataPersistences = FindAllIDataPersistences();
-        LoadGame();
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
-
-    public void SaveGame()
-    {
-        foreach (IDataPersistence dataPersistence in dataPersistences)
+        public void LoadGame()
         {
-            dataPersistence.SaveData(ref data);
-        }   
-     
-        dataHandler.Save(data);
-        
-        DebugHelper.LogSystem("Game Saved");
-    }
+            this.data = dataHandler.Load();
 
-    public void LoadGame()
-    {
-        this.data = dataHandler.Load();
-        
-        if (this.data == null)
-        {
-            DebugHelper.LogSystem("No GameData was found.");
-            NewGame();
+            if (this.data == null)
+            {
+                DebugHelper.LogSystem("No GameData was found.");
+                NewGame();
+            }
+
+            foreach (IDataPersistence dataPersistence in dataPersistences)
+            {
+                dataPersistence.LoadData(data);
+            }
+
+            DebugHelper.LogSystem("Game Loaded");
         }
-        
-        foreach (IDataPersistence dataPersistence in dataPersistences)
-        {
-            dataPersistence.LoadData(data);
-        }   
-        
-        DebugHelper.LogSystem("Game Loaded");
-    }
 
-    public void NewGame()
-    {
-        this.data = new GameData();
-        
-        InventoryManager invenManager = InventoryManager.Instance; 
-        
-        data.InventorySlots.Clear();
-        for (int i = 0; i < invenManager.InventorySlotCount + invenManager.SlotbarSlotCount; i++)
+        public void NewGame()
         {
-            data.InventorySlots.Add(new Slot(i, null, 0));
+            this.data = new GameData();
+
+            InventoryManager invenManager = InventoryManager.Instance;
+
+            data.InventorySlots.Clear();
+            for (int i = 0; i < invenManager.InventorySlotCount + invenManager.SlotbarSlotCount; i++)
+            {
+                data.InventorySlots.Add(new Slot(i, null, 0));
+            }
+
+            dataHandler.Save(data);
         }
-        
-        dataHandler.Save(data);
-    }
-    
-    
-    [ButtonMethod]
-    public void NewGameForEdit()
-    {
-        this.data = new GameData();
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
 
-        InventoryManager invenManager = FindObjectOfType<InventoryManager>(); 
-        
-        data.InventorySlots.Clear();
-        for (int i = 0; i < invenManager.InventorySlotCount + invenManager.SlotbarSlotCount; i++)
+        [ButtonMethod]
+        public void NewGameForEdit()
         {
-            data.InventorySlots.Add(new Slot(i, null, 0));
+            this.data = new GameData();
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+
+            InventoryManager invenManager = FindObjectOfType<InventoryManager>();
+
+            data.InventorySlots.Clear();
+            for (int i = 0; i < invenManager.InventorySlotCount + invenManager.SlotbarSlotCount; i++)
+            {
+                data.InventorySlots.Add(new Slot(i, null, 0));
+            }
+
+            dataHandler.Save(data);
         }
-        
-        dataHandler.Save(data);
-    }
 
-    private List<IDataPersistence> FindAllIDataPersistences()
-    {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
+        [ButtonMethod]
+        public void DecryptSave()
+        {
+            if (!useEncryption) return;
 
-        return new List<IDataPersistence>(dataPersistenceObjects);
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+            data = dataHandler.Load();
+
+            useEncryption = false;
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+
+            dataHandler.Save(data);
+        }
+
+        [ButtonMethod]
+        public void EncryptSave()
+        {
+            if (useEncryption) return;
+
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+            data = dataHandler.Load();
+
+            useEncryption = true;
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+
+            dataHandler.Save(data);
+        }
+
+        private List<IDataPersistence> FindAllIDataPersistences()
+        {
+            IEnumerable<IDataPersistence> dataPersistenceObjects =
+                FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
+
+            return new List<IDataPersistence>(dataPersistenceObjects);
+        }
+
     }
-    
 }

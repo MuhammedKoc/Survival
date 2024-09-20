@@ -1,4 +1,4 @@
-namespace Tmn.Data.DataPersistence
+namespace Tmn.Data
 {
     public interface IDataPersistence
     {

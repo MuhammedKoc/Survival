@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Tmn.Debugs;
 using UnityEngine;
 
 namespace Tmn.Data
@@ -8,11 +9,15 @@ namespace Tmn.Data
     {
         private string dataDirPath = "";
         private string dataFilePath = "";
+        private bool useEncryption = false;
 
-        public FileDataHandler(string dataDirPath, string dataFilePath)
+        private readonly string encryptionCodeWord = "Atreus";
+
+        public FileDataHandler(string dataDirPath, string dataFilePath, bool useEncryption)
         {
             this.dataDirPath = dataDirPath;
             this.dataFilePath = dataFilePath;
+            this.useEncryption = useEncryption;
         }
 
         public GameData Load()
@@ -30,6 +35,11 @@ namespace Tmn.Data
                         {
                             dataToLoad = reader.ReadToEnd();
                         }
+                    }
+                    
+                    if (useEncryption)
+                    {
+                        dataToLoad = EncryptDecrypt(dataToLoad);
                     }
 
                     loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
@@ -51,6 +61,11 @@ namespace Tmn.Data
 
                 string dataToStore = JsonUtility.ToJson(data, true);
 
+                if (useEncryption)
+                {
+                    dataToStore = EncryptDecrypt(dataToStore);
+                }
+
                 using (FileStream stream = new FileStream(fullPath, FileMode.Create))
                 {
                     using (StreamWriter writer = new StreamWriter(stream))
@@ -63,6 +78,17 @@ namespace Tmn.Data
             {
                 DebugHelper.LogSystem("Error occured when trying to save data file" + fullPath + "\n" + e);
             }
+        }
+
+        private string EncryptDecrypt(string data)
+        {
+            string modifiedData = "";
+            for (int i = 0; i < data.Length; i++)
+            {
+                modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
+            }
+
+            return modifiedData;
         }
     }
 }
