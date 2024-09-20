@@ -1,4 +1,4 @@
-namespace Tmn.Debug
+namespace Tmn.Debugs
 {
     public enum TmmLogType
     {
